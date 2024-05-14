@@ -37,7 +37,7 @@ export default function FourthSectionCanvas() {
   }, [contactRef.current]);
 
   return (
-    <group ref={earthMoonRef} position={[0, -70, -20]}>
+    <group ref={earthMoonRef} position={[0, -82, -20]}>
       <group position={[-6, 0, 4]}>
         <Earth />
         <Moon />

@@ -1,0 +1,27 @@
+.About {
+  display: flex;
+  flex-direction: column;
+  gap: 2rem;
+  z-index: 1;
+  position: relative;
+  width: 90%;
+  margin-inline: auto;
+  &__Header {
+    font-size: 2.4rem;
+    font-weight: 900;
+    color: #fffdf7;
+    letter-spacing: 2px;
+    z-index: 1;
+  }
+  &__Portrait {
+    position: absolute;
+    top: 11%;
+    right: 0;
+  }
+  &__Info {
+    font-weight: 500;
+    color: #eaf2e3;
+    font-size: 1.4rem;
+    width: 60%;
+  }
+}

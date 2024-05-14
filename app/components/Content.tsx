@@ -26,7 +26,7 @@ export default function Content() {
       >
     >(null);
   useFrame(() => {
-    starsRef.current?.rotateY(0.0001);
+    starsRef.current?.rotateY(0.0002);
     camera.position.y = -((window.scrollY / window.innerHeight) * 10).toFixed(
       2
     );
