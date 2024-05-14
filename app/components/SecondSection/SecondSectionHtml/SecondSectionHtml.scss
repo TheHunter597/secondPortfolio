@@ -1,0 +1,77 @@
+.SecondSectionHtml {
+  display: grid;
+  grid-template-columns: repeat(10, 1fr);
+  grid-template-rows: repeat(6, 1fr);
+  row-gap: 3rem;
+  &__Header {
+    font-size: 3.5rem;
+    color: white;
+    font-family: "Roboto", sans-serif;
+    font-weight: 900;
+    grid-column-start: 2;
+    grid-column-end: 6;
+    grid-row-start: 1;
+    grid-row-end: 2;
+    z-index: 1;
+  }
+  &__Skills {
+    grid-column-start: 2;
+    grid-column-end: 10;
+    grid-row-start: 2;
+    grid-row-end: 5;
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    grid-gap: 1rem;
+    z-index: 1;
+  }
+}
+
+.SkillElement {
+  position: relative;
+  padding: 0.3rem 0.6rem;
+  border-radius: 14px;
+  background-color: white;
+  z-index: 2;
+  cursor: pointer;
+  &::before {
+    content: "";
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    scale: 0 1;
+    transform-origin: bottom;
+    background-color: #f87171;
+    border-radius: 14px;
+    z-index: -1;
+  }
+  &:hover::before {
+    transition: 1s;
+    scale: 1 1;
+  }
+  &:hover {
+    .SkillElement__Name,
+    .SkillElement__Icon {
+      color: white;
+      transition-duration: 300ms;
+      transition-delay: 0.2ms;
+    }
+  }
+  &__Main {
+    display: flex;
+    flex-direction: row;
+    justify-items: center;
+    align-items: center;
+    gap: 0.5rem;
+  }
+  &__Icon {
+    color: #1e40af;
+    font-size: 1.6rem;
+  }
+  &__Name {
+    color: #111827;
+    font-family: "Roboto", sans-serif;
+    font-weight: 900;
+  }
+}
