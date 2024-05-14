@@ -10,7 +10,7 @@ export default function LoadingPage() {
   useEffect(() => {
     setTimeout(() => {
       setShowTyped(false);
-    }, 100);
+    }, 7500);
   }, []);
   return (
     <div
