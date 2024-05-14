@@ -1,0 +1,113 @@
+.OtherThirdSectionHtml {
+  height: 400vh;
+  position: relative;
+  margin-top: 16rem;
+  background-color: rgba(0, 0, 0, 0.1);
+  width: 108%;
+  transform: translateX(-4%);
+  &__Content {
+    position: sticky;
+    display: flex;
+    flex-direction: row;
+    overflow: hidden;
+    height: 100vh;
+    top: 10%;
+  }
+}
+.ThirdSectionCard {
+  width: 40rem;
+  height: 36rem;
+  border-radius: 15px;
+  overflow: hidden;
+  transition-duration: 300ms;
+  display: flex;
+  flex-direction: column;
+  gap: 2rem;
+
+  &__Image {
+    border: 1px solid gray;
+    border-radius: 15px;
+    box-shadow: rgba(100, 100, 111, 0.2) 0px 7px 29px 0px;
+    overflow: hidden;
+    transition-duration: 300ms;
+    cursor: pointer;
+    position: relative;
+
+    img {
+      border-radius: 15px;
+      transition-duration: 300ms;
+      overflow: hidden;
+    }
+    &--inactive {
+      img {
+        filter: blur(2px) brightness(0.5);
+        scale: 1.1;
+      }
+    }
+    &--active {
+      img {
+        filter: blur(0px) brightness(1);
+        scale: 1;
+      }
+    }
+    span {
+      position: absolute;
+      bottom: -0%;
+      left: 50%;
+      right: 50%;
+      transform: translate(-50%, -50%);
+      color: white;
+      padding: 0.5rem 1rem;
+      font-size: 1.2rem;
+      font-weight: 700;
+      width: max-content;
+      height: fit-content;
+      text-align: center;
+      background-color: #222222;
+      border-radius: 10px;
+    }
+  }
+  &__Text {
+    display: flex;
+    flex-direction: column;
+    gap: 1.2rem;
+    padding: 0 1rem;
+  }
+}
+.ThirdSectionCardText {
+  &__Headers {
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+    h4 {
+      font-size: 2rem;
+      font-weight: 700;
+      color: #f7934c;
+    }
+  }
+  &__Buttons {
+    display: flex;
+    flex-direction: row;
+    gap: 1rem;
+    button {
+      background-color: #f7934c;
+      color: white;
+      border: none;
+      padding: 0.4rem 0.6rem;
+      font-size: 1.2rem;
+      font-weight: 700;
+      cursor: pointer;
+      transition: all 0.3s;
+      &:hover {
+        background-color: #f7934c;
+        color: white;
+        transform: translateY(-0.5rem);
+      }
+    }
+  }
+  &__Info {
+    font-size: 1rem;
+    color: white;
+    font-weight: 500;
+  }
+}

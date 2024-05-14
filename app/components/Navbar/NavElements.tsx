@@ -5,7 +5,7 @@ import HeaderElement from "./HeaderElement";
 import { LazyMotion, domAnimation } from "framer-motion";
 
 export default function NavElements() {
-  const [currentHovered, setCurrentHovered] = useState<number>(0);
+  const [currentHovered, setCurrentHovered] = useState<number>(-1);
   const leftSideElements = [
     {
       name: "Home",

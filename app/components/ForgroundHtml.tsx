@@ -7,6 +7,7 @@ import ThirdSectionHtml from "./ThirdSection/ThirdSectionHtml/ThirdSectionHtml";
 import MainContext from "../context/context";
 import LoadingPage from "./LoadingPage/LoadingPage";
 import { AnimatePresence, motion } from "framer-motion";
+import OtherThirdSectionHtml from "./ThirdSection/ThirdSectionHtml/other/OtherThirdSectionHtml";
 
 export default function ForgroundHtml() {
   const {
@@ -25,7 +26,8 @@ export default function ForgroundHtml() {
     <div className="ForegroundHtml">
       <FirstSectionHtml />
       <SecondSectionHtml />
-      <ThirdSectionHtml />
+      {/* <ThirdSectionHtml /> */}
+      <OtherThirdSectionHtml />
       <FourthSectionHtml />
     </div>
   );
