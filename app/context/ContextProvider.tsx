@@ -16,6 +16,8 @@ export default function ContextProvider({
   const [showTyped, setShowTyped] = useState(false);
   const [currentSection, setCurrentSection] = useState("home");
 
+  const [isSectionInView, setIsSectionInView] = useState(false);
+
   function changeIsLoading(param: boolean) {
     setIsLoading(() => param);
   }
@@ -32,6 +34,9 @@ export default function ContextProvider({
     setIsPhoneView(() => param);
     setCanvasYModifier(() => (param ? 7 : 9));
   }
+  function changeIsSectionInView(param: boolean) {
+    setIsSectionInView(() => param);
+  }
   return (
     <MainContext.Provider
       value={{
@@ -47,12 +52,21 @@ export default function ContextProvider({
           setCurrentSection: changeCurrentSection,
           setProjectsNum: changeProjectsNum,
           setIsPhoneView: changeIsPhoneView,
+          changeIsSectionInView: changeIsSectionInView,
         },
         currentSection,
         modifiers: {
           isPhoneView,
           canvasYModifier,
           projectsNumber: projectsNum,
+        },
+
+        sectionInView: {
+          isSectionInView: isSectionInView,
+          sectionData: {
+            image: "",
+            title: "",
+          },
         },
       }}
     >

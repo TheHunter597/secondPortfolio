@@ -15,12 +15,20 @@ const MainContext = createContext({
     setCurrentSection: (value: string) => {},
     setProjectsNum: (value: number) => {},
     setIsPhoneView: (value: boolean) => {},
+    changeIsSectionInView: (value: boolean) => {},
   },
   currentSection: "home",
   modifiers: {
     isPhoneView: false,
     canvasYModifier: 9,
     projectsNumber: 4,
+  },
+  sectionInView: {
+    isSectionInView: false,
+    sectionData: {
+      image: "",
+      title: "",
+    },
   },
 });
 

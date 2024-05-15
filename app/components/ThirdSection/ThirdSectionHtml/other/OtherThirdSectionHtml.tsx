@@ -5,14 +5,36 @@ import { useContext, useEffect, useRef } from "react";
 import { motion } from "framer-motion";
 import MainContext from "@/app/context/context";
 export default function OtherThirdSectionHtml() {
-  const sections = [1, 2, 3, 4];
-  const result = sections.map((item) => {
-    return <Card key={item} />;
+  const sections = [
+    {
+      image: "/images/projects/Project_1.png",
+      title: "Random elements",
+    },
+    {
+      image: "/images/projects/Project_2.png",
+      title: "Planet Earth",
+    },
+    {
+      image: "/images/projects/Project_3.png",
+      title: "Wikipedia",
+    },
+    {
+      image: "/images/projects/Project_4.png",
+      title: "The Hup",
+    },
+  ];
+  const ref = useRef<HTMLDivElement>(null);
+  const { scrollYProgress } = useScroll({ target: ref });
+
+  const result = sections.map((item, index) => {
+    return <Card key={`sectionCardNumber${index}`} data={item} />;
   });
 
-  const { scrollYProgress } = useScroll();
-  const x = useTransform(scrollYProgress, [0.43, 1], ["0%", "-98%"]);
-  const ref = useRef<HTMLDivElement>(null);
+  const x = useTransform(
+    scrollYProgress,
+    [0.05, 1],
+    ["0%", `-${(sections.length - 1) * 102.5 + 4}%`]
+  );
   const { functions } = useContext(MainContext);
   const isInView = useInView(ref);
   useEffect(() => {
@@ -27,11 +49,11 @@ export default function OtherThirdSectionHtml() {
       className="OtherThirdSectionHtml"
       id="Projects"
       style={{
-        height: `${sections.length * 100}vh`,
+        height: `${sections.length * 95}vh`,
       }}
     >
       <div className="OtherThirdSectionHtml__Content ">
-        <motion.div style={{ x }} className="flex gap-8">
+        <motion.div style={{ x }} className="w-11/12 gap-2 grid grid-flow-col">
           {result}
         </motion.div>
       </div>

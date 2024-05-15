@@ -1,9 +1,19 @@
 import Image from "next/image";
-import { useRef, useState } from "react";
-import { motion } from "framer-motion";
-export default function Card() {
+import { useContext, useEffect, useRef, useState } from "react";
+import { MotionValue } from "framer-motion";
+import MainContext from "@/app/context/context";
+export default function Card({
+  data: { image, title },
+}: {
+  data: {
+    image: string;
+    title: string;
+  };
+}) {
   const [hovered, setHovered] = useState(false);
   const ref = useRef<HTMLDivElement>(null);
+  const [inView, setInView] = useState(false);
+  const { functions } = useContext(MainContext);
 
   const spanVariants = {
     active: {
@@ -16,7 +26,7 @@ export default function Card() {
     },
   };
   return (
-    <motion.div
+    <div
       className="ThirdSectionCard"
       ref={ref}
       onMouseEnter={(e) => {
@@ -34,20 +44,20 @@ export default function Card() {
         } relative`}
       >
         <Image
-          src="/images/placeholder.png"
+          src={image}
           alt="other1"
           quality={100}
           width={0}
           height={0}
           sizes="100vw"
-          style={{ width: "100%", height: "100%s" }}
+          style={{ width: "100%", height: "100%" }}
         />
-        <motion.span
+        {/* <motion.span
           variants={spanVariants}
           animate={hovered ? "active" : "inactive"}
         >
           Visit Website
-        </motion.span>
+        </motion.span> */}
       </div>
       <div
         className={`ThirdSectionCard__Text ${
@@ -57,9 +67,10 @@ export default function Card() {
         }`}
       >
         <div className="ThirdSectionCardText__Headers">
-          <h4>Mango first</h4>
+          <h4>{title}</h4>
           <div className="ThirdSectionCardText__Buttons">
             <button>Git hup</button>
+            <button>Visit website</button>
           </div>
         </div>
         <p className="ThirdSectionCardText__Info">
@@ -69,6 +80,6 @@ export default function Card() {
           quae.
         </p>
       </div>
-    </motion.div>
+    </div>
   );
 }
