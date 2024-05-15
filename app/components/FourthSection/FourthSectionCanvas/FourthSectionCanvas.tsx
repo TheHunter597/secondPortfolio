@@ -1,11 +1,11 @@
 "use client";
-import { Text3D } from "@react-three/drei";
 import { useContext, useEffect, useRef } from "react";
 import { Group, Object3DEventMap } from "three";
 import * as THREE from "three";
 import Earth from "./elements/Earth";
 import Moon from "./elements/Moon";
 import MainContext from "@/app/context/context";
+import GalaxyGenerator from "../../FirstSection/firstSectionCanvas/components/GalaxyGenerator";
 
 export default function FourthSectionCanvas() {
   const earthMoonRef = useRef<Group<Object3DEventMap>>(null);
@@ -35,12 +35,20 @@ export default function FourthSectionCanvas() {
       meRef.current.rotation.z = -Math.PI / 8;
     }
   }, [contactRef.current]);
-
+  const {
+    modifiers: { projectsNumber, canvasYModifier },
+  } = useContext(MainContext);
   return (
-    <group ref={earthMoonRef} position={[0, -82, -20]}>
+    <group
+      ref={earthMoonRef}
+      position={[0, -(projectsNumber + 5) * canvasYModifier, -20]}
+    >
       <group position={[-6, 0, 4]}>
         <Earth />
         <Moon />
+      </group>
+      <group position={[18, 10, -40]}>
+        <GalaxyGenerator spiral={0.5} branches={7} />
       </group>
     </group>
   );

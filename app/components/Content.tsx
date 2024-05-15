@@ -12,7 +12,6 @@ import {
 import { Environment, PerspectiveCamera, Stars } from "@react-three/drei";
 import GalaxyGenerator from "./FirstSection/firstSectionCanvas/components/GalaxyGenerator";
 import SecondSectionCanvas from "./SecondSection/SecondSectionCanvas/SecondSectionCanvas";
-import { Perf } from "r3f-perf";
 import ThirdSectionCanvas from "./ThirdSection/ThirdSectionCanvas/ThirdSectionCanvas";
 import FourthSectionCanvas from "./FourthSection/FourthSectionCanvas/FourthSectionCanvas";
 export default function Content() {
@@ -47,7 +46,6 @@ export default function Content() {
         speed={1}
         ref={starsRef}
       />
-      <GalaxyGenerator count={3} />
       <FirstSection />
       <SecondSectionCanvas />
       <ThirdSectionCanvas />

@@ -20,7 +20,7 @@ export default function Moon() {
   });
 
   return (
-    <group position={[0, 1, 0]} scale={0.002} ref={moonRef} castShadow>
+    <group position={[0, 1, 0]} scale={0.002} ref={moonRef}>
       <primitive object={moon.scene}></primitive>
     </group>
   );

@@ -3,15 +3,30 @@ import { useTexture } from "@react-three/drei";
 import { useMemo } from "react";
 import { Color } from "three";
 import GenerateGalaxies from "./generateGalaxies";
-const galaxyParams = {
-  count: 20000,
-  size: 0.13,
-  branches: 6,
-  radius: 11,
-  spiral: 0.35,
-  random: 0.45,
-};
-export default function GalaxyGenerator({ count }: { count: number }) {
+interface GalaxyGeneratorParams {
+  count?: number;
+  size?: number;
+  branches?: number;
+  radius?: number;
+  spiral?: number;
+  random?: number;
+}
+export default function GalaxyGenerator({
+  count,
+  size,
+  branches,
+  radius,
+  spiral,
+  random,
+}: GalaxyGeneratorParams) {
+  const galaxyParams = {
+    count: count || 20000,
+    size: size || 0.13,
+    branches: branches || 6,
+    radius: radius || 10,
+    spiral: spiral || 0.35,
+    random: random || 0.45,
+  };
   const texture = useTexture("/images/particles/circle_03.png");
   const vertices = useMemo(() => {
     const vertices = new Float32Array(galaxyParams.count * 3);
@@ -44,7 +59,6 @@ export default function GalaxyGenerator({ count }: { count: number }) {
     return { vertices, colors };
   }, []);
   const galaxyProps = {
-    count,
     vertices: vertices.vertices,
     colors: vertices.colors,
     texture,
@@ -52,5 +66,5 @@ export default function GalaxyGenerator({ count }: { count: number }) {
   };
   const firstGalaxy = GenerateGalaxies(galaxyProps);
 
-  return <group position={[8, 3, -20]}>{firstGalaxy}</group>;
+  return firstGalaxy;
 }

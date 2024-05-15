@@ -13,8 +13,15 @@ const MainContext = createContext({
     setIsLoading: (value: boolean) => {},
     setShowTyped: (value: boolean) => {},
     setCurrentSection: (value: string) => {},
+    setProjectsNum: (value: number) => {},
+    setIsPhoneView: (value: boolean) => {},
   },
   currentSection: "home",
+  modifiers: {
+    isPhoneView: false,
+    canvasYModifier: 9,
+    projectsNumber: 4,
+  },
 });
 
 export default MainContext;

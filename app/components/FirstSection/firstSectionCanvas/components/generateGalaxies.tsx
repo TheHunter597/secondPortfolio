@@ -14,7 +14,6 @@ export default function GenerateGalaxies({
   texture,
   galaxyParams,
 }: {
-  count: number;
   vertices: Float32Array;
   colors: Float32Array;
   texture: any;

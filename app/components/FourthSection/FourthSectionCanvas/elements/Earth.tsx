@@ -2,7 +2,6 @@ import MainContext from "@/app/context/context";
 import { useGLTF } from "@react-three/drei";
 import { useFrame } from "@react-three/fiber";
 import { useContext } from "react";
-import { LoadingManager } from "three";
 
 export default function Earth() {
   const loadingData = useContext(MainContext);
@@ -22,13 +21,8 @@ export default function Earth() {
   });
 
   return (
-    <group
-      scale={0.00008}
-      receiveShadow
-      castShadow
-      rotation={[0, 0, (23.5 * Math.PI) / 180]}
-    >
-      <primitive object={otherEarth.scene} castshadow></primitive>
+    <group scale={0.00008} rotation={[0, 0, (23.5 * Math.PI) / 180]}>
+      <primitive object={otherEarth.scene}></primitive>
     </group>
   );
 }

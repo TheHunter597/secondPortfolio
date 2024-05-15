@@ -9,7 +9,6 @@ export default function BackgroundCanvas() {
         fov: 65,
         position: [0, 0, 7],
       }}
-      shadows
     >
       <color attach="background" args={["#11151C"]} />
       <Content />

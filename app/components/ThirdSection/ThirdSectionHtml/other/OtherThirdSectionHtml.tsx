@@ -5,20 +5,31 @@ import { useContext, useEffect, useRef } from "react";
 import { motion } from "framer-motion";
 import MainContext from "@/app/context/context";
 export default function OtherThirdSectionHtml() {
-  const card = [1, 2, 3, 4, 5];
-  const result = card.map((item) => {
+  const sections = [1, 2, 3, 4];
+  const result = sections.map((item) => {
     return <Card key={item} />;
   });
+
   const { scrollYProgress } = useScroll();
-  const x = useTransform(scrollYProgress, [0.43, 1], ["0%", "-88%"]);
+  const x = useTransform(scrollYProgress, [0.43, 1], ["0%", "-98%"]);
   const ref = useRef<HTMLDivElement>(null);
   const { functions } = useContext(MainContext);
   const isInView = useInView(ref);
   useEffect(() => {
     if (isInView) functions.setCurrentSection("Projects");
   }, [isInView]);
+  useEffect(() => {
+    functions.setProjectsNum(sections.length);
+  }, []);
   return (
-    <div ref={ref} className="OtherThirdSectionHtml" id="#Projects">
+    <div
+      ref={ref}
+      className="OtherThirdSectionHtml"
+      id="Projects"
+      style={{
+        height: `${sections.length * 100}vh`,
+      }}
+    >
       <div className="OtherThirdSectionHtml__Content ">
         <motion.div style={{ x }} className="flex gap-8">
           {result}
