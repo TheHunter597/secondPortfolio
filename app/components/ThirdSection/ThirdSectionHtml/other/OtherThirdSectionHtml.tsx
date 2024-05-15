@@ -33,7 +33,7 @@ export default function OtherThirdSectionHtml() {
   const x = useTransform(
     scrollYProgress,
     [0.05, 1],
-    ["0%", `-${(sections.length - 1) * 102.5 + 4}%`]
+    ["0%", `-${(sections.length - 1) * 101}%`]
   );
   const { functions } = useContext(MainContext);
   const isInView = useInView(ref);

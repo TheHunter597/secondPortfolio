@@ -41,7 +41,7 @@ export default function FourthSectionCanvas() {
   return (
     <group
       ref={earthMoonRef}
-      position={[0, -(projectsNumber + 5) * canvasYModifier, -20]}
+      position={[0, -((projectsNumber + 5) * canvasYModifier) + 3, -20]}
     >
       <group position={[-6, 0, 4]}>
         <Earth />
