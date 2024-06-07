@@ -6,9 +6,10 @@ export default function BackgroundCanvas() {
   return (
     <Canvas
       camera={{
-        fov: 65,
+        fov: 70,
         position: [0, 0, 7],
       }}
+      shadows
     >
       <color attach="background" args={["#11151C"]} />
       <Content />

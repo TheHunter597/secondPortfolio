@@ -6,8 +6,16 @@ export default function ThirdSectionCanvas() {
   const {
     modifiers: { canvasYModifier },
   } = useContext(MainContext);
+  const isPhoneView = useContext(MainContext).modifiers.isPhoneView;
+
   return (
-    <group position={[5, -(canvasYModifier * 2) - 2, -7]}>
+    <group
+      position={[
+        5,
+        isPhoneView ? -15.5 : -(canvasYModifier * 2) - 1,
+        isPhoneView ? -11 : -7,
+      ]}
+    >
       <MainText />
     </group>
   );

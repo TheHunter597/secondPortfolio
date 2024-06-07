@@ -10,7 +10,6 @@ import {
   Points,
 } from "three";
 import { Environment, PerspectiveCamera, Stars } from "@react-three/drei";
-import GalaxyGenerator from "./FirstSection/firstSectionCanvas/components/GalaxyGenerator";
 import SecondSectionCanvas from "./SecondSection/SecondSectionCanvas/SecondSectionCanvas";
 import ThirdSectionCanvas from "./ThirdSection/ThirdSectionCanvas/ThirdSectionCanvas";
 import FourthSectionCanvas from "./FourthSection/FourthSectionCanvas/FourthSectionCanvas";
@@ -26,8 +25,9 @@ export default function Content() {
     >(null);
   useFrame(() => {
     starsRef.current?.rotateY(0.0002);
+
     camera.position.y = -((window.scrollY / window.innerHeight) * 10).toFixed(
-      2
+      3
     );
   });
   const cameraGroup = useRef<Group<Object3DEventMap>>(null);
@@ -39,7 +39,7 @@ export default function Content() {
       <Stars
         radius={100}
         depth={50}
-        count={5000}
+        count={7000}
         factor={4}
         saturation={0}
         fade

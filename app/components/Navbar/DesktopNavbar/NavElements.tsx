@@ -4,7 +4,11 @@ import { useState } from "react";
 import HeaderElement from "./HeaderElement";
 import { LazyMotion, domAnimation } from "framer-motion";
 
-export default function NavElements() {
+export default function NavElements({
+  setActive,
+}: {
+  setActive?: React.Dispatch<React.SetStateAction<boolean>>;
+}) {
   const [currentHovered, setCurrentHovered] = useState<number>(-1);
   const leftSideElements = [
     {
@@ -42,11 +46,12 @@ export default function NavElements() {
       currentHovered={currentHovered}
       setCurrentHovered={setCurrentHovered}
       number={element.number}
+      setActive={setActive}
     />
   ));
   return (
-    <div className="flex flex-row justify-between flex-1">
-      <ul className="flex flex-row gap-4 [&>*]:cursor-pointer child-hover:text-blue-400 child:duration-300">
+    <div className="flex flex-col gap-4 md:gap-0 md:flex-row justify-between flex-1">
+      <ul className="flex flex-col md:flex-row gap-4 [&>*]:cursor-pointer child-hover:text-blue-400 child:duration-300">
         <LazyMotion features={domAnimation}>
           {leftSideElementsResult}
         </LazyMotion>

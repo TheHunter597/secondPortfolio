@@ -6,12 +6,16 @@ export default function Input({
   currentHovered,
   setCurrentHovered,
   type,
+  value,
+  setValue,
 }: {
   label: string;
   element: string;
   currentHovered: string;
   setCurrentHovered: React.Dispatch<React.SetStateAction<string>>;
   type: string;
+  value: string;
+  setValue: React.Dispatch<React.SetStateAction<string>>;
 }) {
   const labelVariants = {
     active: {
@@ -24,7 +28,6 @@ export default function Input({
       scale: 1,
     },
   };
-  const [text, setText] = useState("");
   return (
     <div className="ContactMe__Input">
       {element == "input" ? (
@@ -37,9 +40,12 @@ export default function Input({
           onFocus={(e) => {
             setCurrentHovered(label);
           }}
-          value={text}
+          value={value}
           onChange={(e) => {
-            setText(e.target.value);
+            setValue(e.target.value);
+          }}
+          onBlur={() => {
+            setCurrentHovered("");
           }}
         />
       ) : (
@@ -52,16 +58,19 @@ export default function Input({
           onFocus={(e) => {
             setCurrentHovered(label);
           }}
-          value={text}
+          value={value}
           onChange={(e) => {
-            setText(e.target.value);
+            setValue(e.target.value);
+          }}
+          onBlur={() => {
+            setCurrentHovered("");
           }}
         ></textarea>
       )}
       <motion.label
         variants={labelVariants}
         animate={
-          currentHovered == label || text.length != 0 ? "active" : "inactive"
+          currentHovered == label || value.length != 0 ? "active" : "inactive"
         }
         htmlFor={`Contact-${label}`}
         initial={{ translateY: "50%" }}

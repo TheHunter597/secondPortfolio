@@ -1,7 +1,7 @@
 "use client";
 import { LoadingManager } from "three";
 import MainContext from "./context";
-import { useReducer, useState } from "react";
+import { useEffect, useState } from "react";
 
 export default function ContextProvider({
   children,
@@ -15,9 +15,12 @@ export default function ContextProvider({
   const [isLoading, setIsLoading] = useState(true);
   const [showTyped, setShowTyped] = useState(false);
   const [currentSection, setCurrentSection] = useState("home");
-
   const [isSectionInView, setIsSectionInView] = useState(false);
-
+  useEffect(() => {
+    if (window.innerWidth < 768) {
+      setIsPhoneView(true);
+    }
+  }, []);
   function changeIsLoading(param: boolean) {
     setIsLoading(() => param);
   }

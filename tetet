@@ -1,0 +1,83 @@
+Microservices E-commerce
+
+This is the largest project I have every built after 3 months of work from the designing created with Figma to the front-end created in Next-js and back-end created in Express js , Django with Django rest framework and Spring using Spring boot, The application is using is running on Kubernetes on azure kubernetes , Using MongoDB and PostGres as databases to create 6 different services all of which communicate using Apache Kafka
+
+Services that make the website
+
+Client services (Next-js, Tailwind, Framer-motion, Scss) this is the front-end service
+
+Authentication service (Django, DRF, Postgres database) responsible for user authentication login and signup resetting password and changing users data etc...
+
+Products service (Node-js, Express, Mongoose, MongoDB) responsible for creating the products maintaining the products related to them and all the operations related to them also storing the data of the reviews 
+
+CartWishList service (Node-js, Express, Prisma, Postgres, Redis) responsible for creating users carts and wishlist storing them in redis cache adding products to them deleting products from them etc...
+
+Orders service (Spring, Spring boot, Postgres) responsible for creating the orders of the users if one bought specific products order would be created for it 
+
+Image-remover service (Django, DRF, bgrem) responsible for taking the image the user uploaded remove its background (if the user checked remove background button while uploading the image) 
+
+Authentication service
+
+Built with Django, DRF and using PostgresDB, it contains the Users Model the service is responsible for creating users, updating users, deactivating users accounts, reseting-password,  sending email verification links and creating jwt tokens that are responsible for telling all others services that the user is authenticated take a look at User model
+
+when a new user is created a producer called UserCreatedProducer creates a Kafka message listened to by all other services, the other services receive the message and create a mini local user instance this instance have mainly two fields (user_id,is_active) as not all other data is needed by other services
+
+I thought about making the users only local to the Authentication service and just create JWT token that the front-end can send to the other back-end services, and if the other services can de-crypt it using the secret key, then the user is authenticated but this created a problem, if the user was banned in the authentication service other services would not know about it until the older JWT token expires, so a local mini user instance is created containing mainly the user_id and is_active properties the other services checks both if the user_id is present in their db and the user is active make them authenticated
+
+When User is created a confirmation message is sent to their email that they have to click on also if they want to reset the password a link would be sent to their email
+
+Products service
+
+Built with Node-js, Express, Mongooes and Using MongoDB, it contains the main logic responsible for creating, updating, deleting products and reviews 
+
+when a new product is created ProductCreatedProducer would create a message to Kafka that is listened to by the CartWishlist and the Orders services, their is also a schema validator(jsonschema package) that makes sure that the JSON format sent to Kafka it with the right properties
+
+The product can have multiple properties Title, Description, Creator, Colors, Sizes, Rating, features and many others more visit this link to see the product model products model
+
+The data of these products are all real products scrapped from amazon.com using custom Web scrapper I created here is the githup code for it PyScrapper, the data was re-formated to fit into my website using js script, the js script is not on Githup contact me if you want it for some reason
+
+CartWishList service
+
+Built with Node, Express, Prisma, Redis and using PostgresDB, it contains the logic for creating updating deleting users carts and wishlists
+
+The service also is linked to redis instance to make it faster to get retrieve and change the cart data the cart in the redis instance is deleted if not updated, or accessed within the last 7 days
+
+I mainly created redis instance for this service as the cart page in website front-end depends on client side fetching of the data which dose not take that long to load some milliseconds but if the number of users increase it would need more so I thought this would be better also asked ChatGpt and it approved it
+
+It contains multiple Kafka consumers for product created, updated, deleted also listeners for user created, deleted
+
+There is not specific reason for using prisma its just a new technology that I thought would be interesting to use 
+
+Orders service
+
+Built with spring, spring boot, hibernate, spring JPA and PostgresDB its responsible for creating users orders after the user confirm a purchase one order containing the quantity ordered and the total price
+
+I am still new in spring and spring boot this service was originally built with Django but I thought it would be fun to add another different technology to the back-end, so I learned Java, learned Spring, Spring boot how to use spring security  to built this service :)
+
+Image remover service
+
+Built with Django, DRF, Rembg python package, its responsible for removing the image background if the user wants to
+
+its really very simple just takes the image from the front-end if the user check when creating or editing product, if the remove background button is checked the image would be sent from the front-end to this service(originally the image uploaded should go to firebase but this button alters the flow to send it to this service first and then receive the altered image and send it to firebase) the  service would remove the background , send it back to the front-end which would send it to firebase
+
+The Front-end
+
+Built with Typescript, React, Next-Js , Framer-motion, Redux, Axios, Tailwind and others
+
+The main website front-end designed it with Figma, its the longest chanllenge I have ever faced building a page which required making desktop and phone figma design for it translating this into front-end code adding custom animation testing that everything works correctly this service alone contains about Eleven Thousands lines of code and its not even finished !!!!!
+
+Talking about this service would take forever a very small example it the signup process which is formed of 5 steps from normal registration to waiting for email verification then adding your personal data, choosing your interests, and uploading you avatar their is so much that is going on in the background a lot of communication between the front-end and the authentication service, although its working fine I still have a bad feeling there is something wrong
+
+I am just amazed at how large and complex it is, Dont know what is that feeling but whatever have a tour inside the website
+
+Figma
+
+The design for the front-end was created using figma I am with no mean a figma master I took a small Bootcamp in it, this is my first major full website I designed with it you can see the designs the prototypes and everything in here  Figma Design
+
+The results page contains the designs intended to be used 
+
+The assets contains the reusable components
+
+and Page 1 is like a small palyground its not important
+
+please take a note that some designs in the result are not being used yet the front-end is not yet finished, and some others the design it different from the acutal code as when implementing the design I did not like so I tweeked a little on the frontend while maintaining the design if I want to revert

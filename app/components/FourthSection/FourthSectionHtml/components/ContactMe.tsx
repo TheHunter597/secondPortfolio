@@ -1,20 +1,13 @@
-import { FaFacebook } from "react-icons/fa6";
 import { FaWhatsapp } from "react-icons/fa";
-import { FaLinkedin } from "react-icons/fa";
+import { BiLogoGmail } from "react-icons/bi";
 import InputsResult from "./InputsResult";
+import Link from "next/link";
+import ContactForm from "./ContactForm";
 export default function ContactMe() {
   return (
-    <div className="w-11/12 sm:w-5/12 bg-white shadow-lg rounded-md h-fit">
+    <div className="w-11/12 lg:w-1/3 md:w-5/12 sm:w-6/12  bg-white shadow-lg rounded-md h-fit">
       <div className="ContactMe">
-        <form>
-          <div>
-            <legend>Send me a message</legend>
-            <fieldset>
-              <InputsResult />
-            </fieldset>
-          </div>
-          <button type="submit">Send</button>
-        </form>
+        <ContactForm />
         <div className="ContactMe__Socials">
           <h4>
             <span>OR </span>
@@ -22,9 +15,12 @@ export default function ContactMe() {
           <div className="Socials__Content">
             <span>Contact me via :</span>
             <div className="Socials__Icons">
-              <FaFacebook />
-              <FaWhatsapp />
-              <FaLinkedin />
+              <Link href={"https://wa.me/01229308595"} target="_blank">
+                <FaWhatsapp />
+              </Link>
+              <Link href={"mailto:thehunter597777@gmail.com"} target="_blank">
+                <BiLogoGmail />
+              </Link>
             </div>
           </div>
         </div>
