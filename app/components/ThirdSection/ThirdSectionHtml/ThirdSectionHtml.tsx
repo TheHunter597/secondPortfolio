@@ -1,41 +1,89 @@
-import { useContext, useEffect, useRef } from "react";
+"use client";
+import { useInView, useScroll, useTransform } from "framer-motion";
+import Card from "./components/Card";
 import "./ThirdSectionHtml.scss";
-import ProjectSection from "./components/ProjectSection";
+
+import { useContext, useEffect, useMemo, useRef, useState } from "react";
+import { motion } from "framer-motion";
 import MainContext from "@/app/context/context";
-import { LazyMotion, domAnimation, useInView } from "framer-motion";
-export default function ThirdSectionHtml() {
-  const sectionsData = [
-    {
-      header: "Welcome to summoners rift",
-      content:
-        "Welcome to summoners rift, the place where you can play with your friends and have fun.",
-    },
-    {
-      header: "Not welcome to summoners rift",
-      content:
-        "Not welcome to summoners rift, the place where you can play with your friends and have fun.",
-    },
-  ];
-  const { functions } = useContext(MainContext);
+import Bounded from "@/app/components/utils/Bounded";
+import { MainContentSlice } from "@/prismicio-types";
+
+export default function ThirdSectionMainContent({
+  landingPageProjectsData,
+}: {
+  landingPageProjectsData: MainContentSlice[];
+}) {
+  landingPageProjectsData.sort((a: any, b: any) => {
+    return a.primary.placement - b.primary.placement;
+  });
+  console.log({ landingPageProjectsData });
+
+  const data = landingPageProjectsData.map((item) => {
+    return {
+      image: item.primary["projectimage"].url,
+      title: item.primary.title,
+      // @ts-ignore
+      description: item.primary.summarizeddescription[0]["text"],
+      // @ts-ignore
+      url: item.primary["url"]["url"],
+      // @ts-ignore
+      portfolioUrl: item.primary["portfoliourl"]["url"],
+      // @ts-ignore
+      githubUrl: item.primary["project"] && item.primary["project"]["url"],
+    };
+  });
+  let [phoneView, setPhoneView] = useState(false);
   const ref = useRef<HTMLDivElement>(null);
+  const { scrollYProgress } = useScroll({ target: ref });
+
+  const result = useMemo(() => {
+    return data.map((item, index) => {
+      return (
+        <Card
+          key={`sectionCardNumber${index}`}
+          data={item}
+          phoneView={phoneView}
+        />
+      );
+    });
+  }, [phoneView]);
+
+  const x = useTransform(
+    scrollYProgress,
+    [0.05, 1],
+    ["0%", `-${(data.length - 1) * (phoneView ? 105 : 101)}%`]
+  );
+  const { functions } = useContext(MainContext);
   const isInView = useInView(ref);
   useEffect(() => {
+    if (window.innerWidth < 768) setPhoneView(true);
     if (isInView) functions.setCurrentSection("Projects");
   }, [isInView]);
-  const sectionsResult = sectionsData.map((section, index) => {
-    return (
-      <ProjectSection
-        key={`projectSection-${index}`}
-        header={section.header}
-        content={section.content}
-      />
-    );
-  });
+  console.log({ phoneView });
+
+  useEffect(() => {
+    functions.setProjectsNum(data.length);
+  }, []);
   return (
-    <section ref={ref} className="ThirdSectionHtml" id="Projects">
-      <div className="ThirdSectionHtml__Content">
-        <LazyMotion features={domAnimation}>{sectionsResult}</LazyMotion>
+    <Bounded>
+      <div
+        ref={ref}
+        className="ThirdSectionHtml"
+        id="Projects"
+        style={{
+          height: `${data.length * 95}vh`,
+        }}
+      >
+        <div className="ThirdSectionHtml__Content ">
+          <motion.div
+            style={{ x }}
+            className="w-11/12 gap-2 grid grid-flow-col"
+          >
+            {result}
+          </motion.div>
+        </div>
       </div>
-    </section>
+    </Bounded>
   );
 }

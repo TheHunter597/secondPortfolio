@@ -1,0 +1,155 @@
+.ThirdSectionHtml {
+  position: relative;
+  background-color: rgba(0, 0, 0, 0.1);
+  width: 108%;
+  margin-top: 10rem;
+  transform: translateX(-4%);
+}
+.ThirdSectionHtml__Content {
+  position: sticky;
+  display: flex;
+  flex-direction: row;
+  overflow: hidden;
+  top: 10%;
+}
+
+.ThirdSectionCard {
+  border: 2px solid rgba(0, 0, 0, 0.3);
+  border-radius: 5px;
+  width: 90vw;
+  height: 90svh;
+  overflow: hidden;
+  transition-duration: 300ms;
+  display: flex;
+  flex-direction: column;
+  gap: 2rem;
+  position: relative;
+}
+@media screen and (max-width: 768px) {
+  .ThirdSectionCard {
+    height: 85svh;
+    width: 94vw;
+  }
+}
+.ThirdSectionCard__Image {
+  overflow: hidden;
+  transition-duration: 300ms;
+  position: relative;
+  width: 100%;
+  height: 100%;
+}
+.ThirdSectionCard__Image img {
+  transition-duration: 300ms;
+  overflow: hidden;
+  width: 100%;
+  height: 100%;
+}
+@media screen and (max-width: 768px) {
+  .ThirdSectionCard__Image img {
+    height: 70%;
+  }
+}
+.ThirdSectionCard__Image span {
+  position: absolute;
+  bottom: 0%;
+  left: 50%;
+  right: 50%;
+  transform: translate(-50%, -50%);
+  color: white;
+  padding: 0.5rem 1rem;
+  font-size: 1.2rem;
+  font-weight: 700;
+  width: -moz-max-content;
+  width: max-content;
+  height: -moz-fit-content;
+  height: fit-content;
+  text-align: center;
+  background-color: #222222;
+  border-radius: 10px;
+}
+.ThirdSectionCard__Text {
+  display: flex;
+  flex-direction: column;
+  gap: 1.2rem;
+  position: absolute;
+  bottom: 0%;
+  padding: 2rem 1rem;
+  height: 40%;
+  background-color: rgba(0, 0, 0, 0.9);
+}
+@media screen and (max-width: 768px) {
+  .ThirdSectionCard__Text {
+    padding: 1rem 0.5rem;
+    height: 50%;
+  }
+}
+
+.ThirdSectionCardText__Headers {
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+}
+@media screen and (max-width: 768px) {
+  .ThirdSectionCardText__Headers {
+    flex-direction: column;
+    gap: 1rem;
+  }
+}
+.ThirdSectionCardText__Headers h4 {
+  font-size: 1.8rem;
+  font-weight: 700;
+  color: #f7934c;
+}
+@media screen and (max-width: 768px) {
+  .ThirdSectionCardText__Headers h4 {
+    font-size: 1.2rem;
+  }
+}
+.ThirdSectionCardText__Buttons {
+  display: flex;
+  flex-direction: row;
+  align-self: flex-end;
+  gap: 1rem;
+}
+@media screen and (max-width: 768px) {
+  .ThirdSectionCardText__Buttons {
+    gap: 0.5rem;
+  }
+}
+.ThirdSectionCardText__Buttons .info {
+  background-color: #dc2626 !important;
+}
+.ThirdSectionCardText__Buttons a {
+  background-color: #f7934c;
+  color: white;
+  border: none;
+  padding: 0.4rem 0.6rem;
+  border-radius: 1px;
+  font-size: 1.3rem;
+  font-weight: 700;
+  cursor: pointer;
+  transition: all 0.3s;
+}
+@media screen and (max-width: 768px) {
+  .ThirdSectionCardText__Buttons a {
+    padding: 0.4rem 0.5rem;
+    font-size: 1rem;
+  }
+}
+.ThirdSectionCardText__Buttons a:hover {
+  background-color: #f7934c;
+  color: white;
+  transform: translateY(-0.3rem);
+}
+.ThirdSectionCardText__Info {
+  font-size: 1rem;
+  color: white;
+  font-weight: 500;
+  max-width: 70%;
+}
+@media screen and (max-width: 768px) {
+  .ThirdSectionCardText__Info {
+    max-width: 100%;
+    font-size: 0.85rem;
+  }
+}/*# sourceMappingURL=ThirdSectionHtml.css.map */

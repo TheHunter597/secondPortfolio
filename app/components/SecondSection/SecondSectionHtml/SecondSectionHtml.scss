@@ -15,7 +15,7 @@
     z-index: 1;
   }
   &__Skills {
-    grid-column-start: 2;
+    grid-column-start: 1;
     grid-column-end: 10;
     grid-row-start: 2;
     grid-row-end: 5;
@@ -23,6 +23,7 @@
     grid-template-columns: repeat(3, 1fr);
     grid-gap: 1rem;
     z-index: 1;
+    overflow-x: clip;
   }
 }
 
@@ -73,5 +74,25 @@
     color: #111827;
     font-family: "Roboto", sans-serif;
     font-weight: 900;
+  }
+}
+
+.SecondSection {
+  &__Header {
+    font-size: 3.5rem;
+    @media screen and (max-width: 768px) {
+      font-size: 2.8rem;
+      width: 90%;
+      margin-inline: auto;
+    }
+    color: white;
+    font-family: "Roboto", sans-serif;
+    font-weight: 900;
+    width: 80%;
+    margin-inline: auto;
+    div {
+      z-index: 2;
+      position: relative;
+    }
   }
 }

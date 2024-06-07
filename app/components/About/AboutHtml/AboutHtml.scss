@@ -1,27 +1,84 @@
 .About {
-  display: flex;
-  flex-direction: column;
-  gap: 2rem;
+  display: grid;
+  height: fit-content;
+  @media screen and (max-width: 768px) {
+    display: flex;
+    flex-direction: column;
+    gap: 4rem;
+    justify-items: center;
+    align-items: center;
+    margin-top: 5rem;
+  }
+  grid-template-columns: repeat(8, 1fr);
   z-index: 1;
   position: relative;
+  place-content: center;
   width: 90%;
   margin-inline: auto;
+  &__Content {
+    display: flex;
+    flex-direction: column;
+    gap: 1rem;
+    grid-column-start: 1;
+    grid-column-end: 7;
+  }
   &__Header {
     font-size: 2.4rem;
+    @media screen and (max-width: 768px) {
+      font-size: 1.6rem;
+    }
     font-weight: 900;
     color: #fffdf7;
     letter-spacing: 2px;
     z-index: 1;
   }
   &__Portrait {
-    position: absolute;
-    top: 11%;
-    right: 0;
+    grid-column-start: 7;
+    grid-column-end: 9;
+    transition-duration: 500ms;
+    position: relative;
+    div {
+      &::before {
+        content: "";
+        display: block;
+        position: absolute;
+        top: 0;
+        left: 0;
+        background-color: rgba($color: #000000, $alpha: 0.1);
+        width: 0%;
+        height: 100%;
+        transition-duration: 500ms;
+      }
+    }
+    &:hover {
+      transform: skew(1deg) scale(1.02);
+      div {
+        &::before {
+          animation: ImageAnimation 1s forwards;
+        }
+      }
+    }
   }
   &__Info {
     font-weight: 500;
     color: #eaf2e3;
-    font-size: 1.4rem;
-    width: 60%;
+    font-size: 1.2rem;
+    @media screen and (max-width: 768px) {
+      font-size: 1rem;
+    }
+    width: 80%;
+    @media screen and (max-width: 768px) {
+      width: 100%;
+    }
+  }
+}
+
+@keyframes ImageAnimation {
+  0% {
+    width: 10%;
+  }
+
+  100% {
+    width: 100%;
   }
 }

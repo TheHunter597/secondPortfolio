@@ -8,6 +8,8 @@ interface HeaderElementProps {
   currentHovered: number;
   setCurrentHovered: React.Dispatch<React.SetStateAction<number>>;
   number: number;
+  active?: boolean;
+  setActive?: React.Dispatch<React.SetStateAction<boolean>>;
 }
 
 export default function HeaderElement({
@@ -16,6 +18,7 @@ export default function HeaderElement({
   currentHovered,
   setCurrentHovered,
   number,
+  setActive,
 }: HeaderElementProps) {
   const { currentSection } = useContext(MainContext);
   const dots = [1, 2, 3];
@@ -42,7 +45,7 @@ export default function HeaderElement({
   const dotsResult = dots.map((dot) => (
     <m.div
       key={`${name}-dot-${dot}`}
-      className="p-1 rounded-full bg-green-300"
+      className="p-1 rounded-full bg-blue-300 md:bg-green-300"
       variants={variants}
     ></m.div>
   ));
@@ -55,8 +58,19 @@ export default function HeaderElement({
       onMouseOut={() => {
         if (currentHovered == number) setCurrentHovered(-1);
       }}
+      className="flex flex-col gap-1 items-center justify-center md:block"
     >
-      <Link href={link}>{name}</Link>
+      <Link
+        href={link}
+        className="md:text-white text-red-400"
+        onClick={() => {
+          if (setActive) {
+            setActive(() => false);
+          }
+        }}
+      >
+        {name}
+      </Link>
       <m.div
         className="flex flex-row gap-1 justify-center align-middle"
         variants={container}

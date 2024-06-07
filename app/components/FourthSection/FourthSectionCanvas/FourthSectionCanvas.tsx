@@ -38,10 +38,15 @@ export default function FourthSectionCanvas() {
   const {
     modifiers: { projectsNumber, canvasYModifier },
   } = useContext(MainContext);
+  const isPhoneView = useContext(MainContext).modifiers.isPhoneView;
   return (
     <group
       ref={earthMoonRef}
-      position={[0, -((projectsNumber + 5) * canvasYModifier) + 3, -20]}
+      position={[
+        isPhoneView ? 6 : 0,
+        isPhoneView ? -65 : -((projectsNumber + 5) * canvasYModifier) + 5,
+        isPhoneView ? -38 : -20,
+      ]}
     >
       <group position={[-6, 0, 4]}>
         <Earth />

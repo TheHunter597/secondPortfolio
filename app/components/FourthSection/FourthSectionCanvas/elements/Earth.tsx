@@ -14,7 +14,6 @@ export default function Earth() {
       loader.manager = loadingData.loading.loader;
     }
   );
-
   useFrame((state) => {
     const t = state.clock.getElapsedTime();
     otherEarth.scene.rotation.y = t / 30;

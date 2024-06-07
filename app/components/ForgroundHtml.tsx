@@ -1,36 +1,19 @@
-"use client";
-import { useContext, useEffect } from "react";
-import FirstSectionHtml from "./FirstSection/firstSectionHtml/firstSectionHtml";
-import FourthSectionHtml from "./FourthSection/FourthSectionHtml/FourthSectionHtml";
-import SecondSectionHtml from "./SecondSection/SecondSectionHtml/SecondSectionHtml";
-import ThirdSectionHtml from "./ThirdSection/ThirdSectionHtml/ThirdSectionHtml";
-import MainContext from "../context/context";
-import LoadingPage from "./LoadingPage/LoadingPage";
-import { AnimatePresence, motion } from "framer-motion";
-import OtherThirdSectionHtml from "./ThirdSection/ThirdSectionHtml/other/OtherThirdSectionHtml";
-import AboutHtml from "./About/AboutHtml/AboutHtml";
+import { createClient } from "@/prismicio";
+import ForegroundHtmlContent from "./ForgroundHtmlContent";
 
-export default function ForgroundHtml() {
-  const {
-    loading: { isLoading, loader, showTyped },
-    functions,
-  } = useContext(MainContext);
-  loader.onLoad = () => {
-    functions.setIsLoading(false);
-  };
-  useEffect(() => {
-    functions.setShowTyped(true);
-  }, []);
-  return isLoading || showTyped ? (
-    <LoadingPage />
-  ) : (
-    <div className="ForegroundHtml">
-      <FirstSectionHtml />
-      <SecondSectionHtml />
-      {/* <ThirdSectionHtml /> */}
-      <OtherThirdSectionHtml />
-      <AboutHtml />
-      <FourthSectionHtml />
-    </div>
+export default async function ForgroundHtml() {
+  const client = createClient();
+  let projects = (await client.getAllByType("landingpageproject"))
+    .map((project) => project.data)
+    .map((project) => {
+      return project.slices[0];
+    });
+  let firstProject = projects.shift();
+  projects.push(firstProject);
+  return (
+    <ForegroundHtmlContent
+      // @ts-ignore
+      landingPageProjectsData={projects != undefined ? projects : []}
+    />
   );
 }

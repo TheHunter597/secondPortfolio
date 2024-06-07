@@ -8,8 +8,15 @@ export default function FirstSection() {
   const {
     modifiers: { canvasYModifier },
   } = useContext(MainContext);
+  const isPhoneView = useContext(MainContext).modifiers.isPhoneView;
   return (
-    <group position={[8, 0 * canvasYModifier + 2, -20]}>
+    <group
+      position={[
+        isPhoneView ? 2 : 8,
+        isPhoneView ? 5 : 0 * canvasYModifier + 2,
+        -20 * (isPhoneView ? 2 : 1),
+      ]}
+    >
       <directionalLight intensity={2} position={[5, 3, 5]} ref={dLightHelper} />
       <ambientLight intensity={0.5} />
       <GalaxyGenerator />

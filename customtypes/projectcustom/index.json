@@ -1,0 +1,21 @@
+{
+  "format": "custom",
+  "id": "projectcustom",
+  "label": "ProjectCustom",
+  "repeatable": true,
+  "status": true,
+  "json": {
+    "Main": {
+      "uid": {
+        "config": {
+          "label": "UID"
+        },
+        "type": "UID"
+      },
+      "slices": {
+        "type": "Slices",
+        "fieldset": "Slice Zone"
+      }
+    }
+  }
+}

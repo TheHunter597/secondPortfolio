@@ -1,0 +1,34 @@
+@import url("https://fonts.googleapis.com/css2?family=Bebas+Neue&family=Tinos:ital,wght@0,400;0,700;1,400;1,700&display=swap");
+.InfitieSkillElement {
+  font-size: 2.4rem;
+  @media screen and (max-width: 768px) {
+    font-size: 1.6rem;
+    padding: 0.2rem 0.7rem;
+  }
+  font-weight: 700;
+  width: fit-content;
+  padding: 0.15rem 1.5rem;
+
+  white-space: nowrap;
+  cursor: pointer;
+  text-align: center;
+  position: relative;
+  font-family: "Bebas Neue";
+  &::before {
+    content: "";
+    display: block;
+    position: absolute;
+    top: 0;
+    left: 0;
+    background-color: black;
+    width: 0%;
+    height: 100%;
+    transition-duration: 500ms;
+  }
+  &:hover::before {
+    width: 100%;
+    background-color: rgba(0, 0, 0, 0.6);
+    z-index: -1;
+    transform-origin: left center;
+  }
+}
