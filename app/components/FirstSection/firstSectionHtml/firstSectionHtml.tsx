@@ -62,16 +62,16 @@ export default function FirstSectionHtml() {
                   sequence={[
                     // Same substring at the start will only be typed once, initially
                     `Interested in${isPhoneView ? "\n" : " "}Web Development`,
-                    1500,
+                    500,
 
                     `Love to get lost${isPhoneView ? "\n" : " "}in spring docs`,
-                    1500,
+                    500,
                     `Contact me for${isPhoneView ? "\n" : " "}any help`,
                     200,
                   ]}
                   speed={{
                     type: "keyStrokeDelayInMs",
-                    value: 120,
+                    value: 70,
                   }}
                   className="FirstSectionHeader__Typed"
                 />

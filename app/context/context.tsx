@@ -14,7 +14,6 @@ const MainContext = createContext({
     setShowTyped: (value: boolean) => {},
     setCurrentSection: (value: string) => {},
     setProjectsNum: (value: number) => {},
-    setIsPhoneView: (value: boolean) => {},
     changeIsSectionInView: (value: boolean) => {},
   },
   currentSection: "home",
