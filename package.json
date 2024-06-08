@@ -21,6 +21,7 @@
     "@react-three/fiber": "^8.16.6",
     "@types/three": "^0.164.0",
     "@vercel/speed-insights": "^1.0.10",
+    "emailjs": "^4.0.3",
     "framer-motion": "^11.1.9",
     "gsap": "^3.12.5",
     "lenis": "^1.1.2",

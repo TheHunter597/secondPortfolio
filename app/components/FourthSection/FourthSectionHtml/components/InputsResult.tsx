@@ -6,14 +6,27 @@ export default function InputsResult({
   setEmail,
   message,
   setMessage,
+  name,
+  setName,
+  errors,
 }: {
   email: string;
   setEmail: React.Dispatch<React.SetStateAction<string>>;
   message: string;
   setMessage: React.Dispatch<React.SetStateAction<string>>;
+  name: string;
+  setName: React.Dispatch<React.SetStateAction<string>>;
+  errors: { [key: string]: string };
 }) {
   const [currentHovered, setCurrentHovered] = useState<string>("");
   const inputsNeeded = [
+    {
+      label: "Name",
+      element: "input",
+      type: "text",
+      value: name,
+      setValue: setName,
+    },
     {
       label: "Email",
       element: "input",
@@ -40,6 +53,7 @@ export default function InputsResult({
       value={input.value}
       setValue={input.setValue}
       type={input.type}
+      error={errors[input.label]}
     />
   ));
   return result;

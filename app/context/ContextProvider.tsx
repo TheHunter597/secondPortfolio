@@ -20,6 +20,9 @@ export default function ContextProvider({
     if (window.innerWidth < 768) {
       setIsPhoneView(true);
     }
+    window.addEventListener("scroll", () => {
+      console.log({ isPhoneView });
+    });
   }, []);
   function changeIsLoading(param: boolean) {
     setIsLoading(() => param);
@@ -33,10 +36,7 @@ export default function ContextProvider({
   function changeProjectsNum(param: number) {
     setProjectsNum(() => param);
   }
-  function changeIsPhoneView(param: boolean) {
-    setIsPhoneView(() => param);
-    setCanvasYModifier(() => (param ? 7 : 9));
-  }
+
   function changeIsSectionInView(param: boolean) {
     setIsSectionInView(() => param);
   }
@@ -54,7 +54,6 @@ export default function ContextProvider({
           setShowTyped: changeShowTyped,
           setCurrentSection: changeCurrentSection,
           setProjectsNum: changeProjectsNum,
-          setIsPhoneView: changeIsPhoneView,
           changeIsSectionInView: changeIsSectionInView,
         },
         currentSection,

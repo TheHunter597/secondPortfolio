@@ -21,7 +21,7 @@ body {
 section {
   height: 110svh;
   @media screen and (max-width: 768px) {
-    height: 80svh;
+    height: 86svh;
   }
 }
 canvas {

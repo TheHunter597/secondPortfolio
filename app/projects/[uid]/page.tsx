@@ -31,9 +31,10 @@ export async function generateMetadata({
   const page = await client
     .getByUID("project", params.uid)
     .catch(() => notFound());
+  console.log({ page: page.data.slices[0]?.primary["title"] });
 
   return {
-    title: page.data.meta_title,
+    title: page.data.slices[0]?.primary["title"],
     description: page.data.meta_description,
   };
 }

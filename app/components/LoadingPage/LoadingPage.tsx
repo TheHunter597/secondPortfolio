@@ -10,7 +10,7 @@ export default function LoadingPage() {
   useEffect(() => {
     setTimeout(() => {
       setShowTyped(false);
-    }, 6400);
+    }, 5500);
   }, []);
   return (
     <TypeAnimation
@@ -25,7 +25,7 @@ export default function LoadingPage() {
         400,
       ]}
       className="FirstSectionHeader__Typed"
-      speed={60}
+      speed={70}
     />
   );
 }

@@ -17,7 +17,6 @@ export default function ThirdSectionMainContent({
   landingPageProjectsData.sort((a: any, b: any) => {
     return a.primary.placement - b.primary.placement;
   });
-  console.log({ landingPageProjectsData });
 
   const data = landingPageProjectsData.map((item) => {
     return {
@@ -52,7 +51,7 @@ export default function ThirdSectionMainContent({
   const x = useTransform(
     scrollYProgress,
     [0.05, 1],
-    ["0%", `-${(data.length - 1) * (phoneView ? 105 : 101)}%`]
+    ["0%", `-${(data.length - 1) * 110}%`]
   );
   const { functions } = useContext(MainContext);
   const isInView = useInView(ref);

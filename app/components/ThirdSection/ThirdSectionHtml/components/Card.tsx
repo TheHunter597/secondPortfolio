@@ -44,7 +44,7 @@ export default function Card({
           width={0}
           height={0}
           sizes="100vw"
-          style={{ width: "100%", height: phoneView ? "50%" : "100%" }}
+          style={{ width: "100%", height: phoneView ? "40%" : "100%" }}
         />
       </div>
       <div
