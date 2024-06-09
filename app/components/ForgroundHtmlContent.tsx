@@ -15,15 +15,9 @@ export default function ForegroundHtmlContent({
   landingPageProjectsData: MainContentSlice[];
 }) {
   const {
-    loading: { isLoading, loader, showTyped },
+    loading: { showTyped },
     functions,
   } = useContext(MainContext);
-  loader.onLoad = () => {
-    functions.setIsLoading(false);
-  };
-  useEffect(() => {
-    functions.setShowTyped(true);
-  }, []);
 
   return (
     <AnimatePresence>
@@ -34,9 +28,19 @@ export default function ForegroundHtmlContent({
           exit={{ opacity: 1, y: "100%" }}
           transition={{ duration: 1.2 }}
           className="z-50 w-full h-full fixed top-0 
-          left-0 bg-black flex justify-center items-center text-center "
+          left-0 bg-black flex flex-col gap-2 justify-center items-center text-center "
         >
-          <LoadingPage />
+          <div className="flex flex-col gap-2 justify-center items-center text-center relative w-screen">
+            <LoadingPage />
+            <small
+              className="text-gray-200 underline text-base cursor-pointer absolute top-32 "
+              onClick={() => {
+                functions.setShowTyped(false);
+              }}
+            >
+              Skip
+            </small>
+          </div>
         </motion.div>
       ) : (
         <div className="ForegroundHtml">

@@ -13,16 +13,13 @@ export default function ContextProvider({
   const [projectsNum, setProjectsNum] = useState(4);
 
   const [isLoading, setIsLoading] = useState(true);
-  const [showTyped, setShowTyped] = useState(false);
+  const [showTyped, setShowTyped] = useState(true);
   const [currentSection, setCurrentSection] = useState("home");
   const [isSectionInView, setIsSectionInView] = useState(false);
   useEffect(() => {
     if (window.innerWidth < 768) {
       setIsPhoneView(true);
     }
-    window.addEventListener("scroll", () => {
-      console.log({ isPhoneView });
-    });
   }, []);
   function changeIsLoading(param: boolean) {
     setIsLoading(() => param);
