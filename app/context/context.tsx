@@ -7,7 +7,7 @@ const MainContext = createContext({
     isLoading: false,
     info: "",
     loader: new LoadingManager(),
-    showTyped: false,
+    showTyped: true,
   },
   functions: {
     setIsLoading: (value: boolean) => {},

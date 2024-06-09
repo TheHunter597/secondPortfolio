@@ -10,19 +10,19 @@ export default function LoadingPage() {
   useEffect(() => {
     setTimeout(() => {
       setShowTyped(false);
-    }, 5500);
+    }, 5100);
   }, []);
   return (
     <TypeAnimation
       sequence={[
         "Loading planet earth",
-        400,
+        480,
         "Loading the moon",
-        400,
+        480,
         "Generating galaxies",
-        400,
+        480,
         "Welcome :)",
-        400,
+        480,
       ]}
       className="FirstSectionHeader__Typed"
       speed={70}

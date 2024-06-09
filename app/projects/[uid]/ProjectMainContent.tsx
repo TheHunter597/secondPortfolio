@@ -16,7 +16,7 @@ export default function ProjectMainContent({
 
   return (
     <div
-      className={`${darkMode ? "bg-gray-900" : "bg-gray-50"} py-16 ${darkMode ? styles.dark : styles.light}`}
+      className={`${darkMode ? "bg-slate-900" : "bg-gray-50"} py-16 ${darkMode ? styles.dark : styles.light}`}
     >
       <div className={styles.Project}>
         <div className="absolute -top-14 text-lg py-2 font-medium w-full flex flex-row justify-between">

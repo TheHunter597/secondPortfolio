@@ -3,20 +3,20 @@
 .light {
   --primary-color: #020617;
   --link-color: #197bbd;
-  --list-color: hsl(261, 25%, 11%);
+  --list-color: rgb(31 41 55 / 1);
   --code-color: #020617;
   --red-color: #ef4444;
   --pre-bg-color: #e2e8f0;
-  --strong-color: #818cf8;
+  --strong-color: #020617;
 }
 .dark {
   --primary-color: #fcfffc;
   --link-color: #197bbd;
-  --list-color: white;
+  --list-color: rgb(233, 229, 226);
   --code-color: white;
   --red-color: #ef4444;
   --pre-bg-color: #1e293b;
-  --strong-color: #818cf8;
+  --strong-color: white;
 }
 .Project {
   width: 70%;

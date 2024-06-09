@@ -31,7 +31,6 @@ export async function generateMetadata({
   const page = await client
     .getByUID("project", params.uid)
     .catch(() => notFound());
-  console.log({ page: page.data.slices[0]?.primary["title"] });
 
   return {
     title: page.data.slices[0]?.primary["title"],
@@ -39,11 +38,11 @@ export async function generateMetadata({
   };
 }
 
-export async function generateStaticParams() {
-  const client = createClient();
-  const pages = await client.getAllByType("project");
+// export async function generateStaticParams() {
+//   const client = createClient();
+//   const pages = await client.getAllByType("project");
 
-  return pages.map((page) => {
-    return { uid: page.uid };
-  });
-}
+//   return pages.map((page) => {
+//     return { uid: page.uid };
+//   });
+// }

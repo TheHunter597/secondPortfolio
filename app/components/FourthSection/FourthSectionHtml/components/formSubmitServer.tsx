@@ -38,12 +38,6 @@ export async function handleSubmit(
   }
 
   if (Object.keys(state.errors).length === 0) {
-    console.log({
-      name,
-      email,
-      message,
-    });
-
     const client = new SMTPClient({
       user: process.env.SMTP_USERNAME,
       password: process.env.SMTP_PASSWORD,

@@ -57,12 +57,14 @@ export default function NavElements({
         </LazyMotion>
       </ul>
       <ul>
-        <button
-          className="px-4 py-2 bg-red-500 text-white font-bold text-md 
+        <a
+          download="Portfolio.pdf"
+          href="/Portfolio.pdf"
+          className="px-4 py-2 bg-red-500 text-white font-bold text-md  cursor-pointer
         hover:bg-transparent hover:text-red-500 border border-red-500 duration-300"
         >
           Download CV
-        </button>
+        </a>
       </ul>
     </div>
   );

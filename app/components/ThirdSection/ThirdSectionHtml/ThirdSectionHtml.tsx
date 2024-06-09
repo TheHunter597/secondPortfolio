@@ -59,7 +59,6 @@ export default function ThirdSectionMainContent({
     if (window.innerWidth < 768) setPhoneView(true);
     if (isInView) functions.setCurrentSection("Projects");
   }, [isInView]);
-  console.log({ phoneView });
 
   useEffect(() => {
     functions.setProjectsNum(data.length);
