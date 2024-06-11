@@ -57,8 +57,16 @@ export default function Card({
         <div className="ThirdSectionCardText__Headers">
           <h4>{title}</h4>
           <div className="ThirdSectionCardText__Buttons">
-            {url && <a href={url}>Visit Website</a>}
-            {githubUrl && <Link href={githubUrl}>Github</Link>}
+            {url && (
+              <a href={url} target="_blank">
+                Visit Website
+              </a>
+            )}
+            {githubUrl && (
+              <Link href={githubUrl} target="_blank">
+                Github
+              </Link>
+            )}
             {portfolioUrl && (
               <Link href={portfolioUrl} className="info">
                 Project Info
