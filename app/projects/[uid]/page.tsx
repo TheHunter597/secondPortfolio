@@ -6,7 +6,6 @@ import { createClient } from "@/prismicio";
 import { components } from "@/slices";
 import ProjectMainContent from "./ProjectMainContent";
 type Params = { uid: string };
-export const dynamic = "force-dynamic";
 export default async function Page({ params }: { params: Params }) {
   const client = createClient();
 
@@ -39,11 +38,11 @@ export async function generateMetadata({
   };
 }
 
-// export async function generateStaticParams() {
-//   const client = createClient();
-//   const pages = await client.getAllByType("project");
+export async function generateStaticParams() {
+  const client = createClient();
+  const pages = await client.getAllByType("project");
 
-//   return pages.map((page) => {
-//     return { uid: page.uid };
-//   });
-// }
+  return pages.map((page) => {
+    return { uid: page.uid };
+  });
+}
