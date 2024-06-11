@@ -6,13 +6,14 @@ import { createClient } from "@/prismicio";
 import { components } from "@/slices";
 import ProjectMainContent from "./ProjectMainContent";
 type Params = { uid: string };
-
+export const dynamic = "force-dynamic";
 export default async function Page({ params }: { params: Params }) {
   const client = createClient();
 
-  const page = await client
-    .getByUID("project", params.uid)
-    .catch(() => notFound());
+  const page = await client.getByUID("project", params.uid).catch((e) => {
+    notFound();
+  });
+
   const content = prismic.asHTML(page.data.slices[0]?.primary.description);
 
   const image = page.data.slices[0]?.primary["projectImage"].url;
