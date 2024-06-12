@@ -12,15 +12,15 @@ export default function Moon() {
 
   useFrame((state) => {
     const t = state.clock.getElapsedTime();
-    moon.scene.rotation.y = t / 2;
+    moon.scene.rotation.y = t / 3;
     if (moonRef.current) {
-      moonRef.current.position.x = Math.cos(-t / 3) * 7;
-      moonRef.current.position.z = Math.sin(-t / 3) * 7;
+      moonRef.current.position.x = Math.cos(-t / 5) * 7;
+      moonRef.current.position.z = Math.sin(-t / 5) * 7;
     }
   });
 
   return (
-    <group position={[0, 1, 0]} scale={0.002} ref={moonRef}>
+    <group position={[0, 1, 0]} scale={0.0015} ref={moonRef}>
       <primitive object={moon.scene}></primitive>
     </group>
   );
