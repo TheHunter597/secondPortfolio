@@ -36,7 +36,6 @@ export async function handleSubmit(
   if (sentCount > 2) {
     state.message = "You have already sent 3 messages. Please try again later.";
   }
-
   if (Object.keys(state.errors).length === 0) {
     const client = new SMTPClient({
       user: process.env.SMTP_USERNAME,

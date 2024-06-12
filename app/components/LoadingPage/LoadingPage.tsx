@@ -10,7 +10,7 @@ export default function LoadingPage() {
   useEffect(() => {
     setTimeout(() => {
       setShowTyped(false);
-    }, 5100);
+    }, 5300);
   }, []);
   return (
     <TypeAnimation
