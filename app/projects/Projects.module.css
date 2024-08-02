@@ -1,0 +1,165 @@
+@import url("https://fonts.googleapis.com/css2?family=Anton&family=Tinos:ital,wght@0,400;0,700;1,400;1,700&display=swap");
+@import url("https://fonts.googleapis.com/css2?family=Ubuntu:ital,wght@0,300;0,400;0,500;0,700;1,300;1,400;1,500;1,700&display=swap");
+.light {
+  --primary-color: #020617;
+  --link-color: #197bbd;
+  --list-color: rgb(31 41 55 / 1);
+  --code-color: #020617;
+  --red-color: #ef4444;
+  --pre-bg-color: #e2e8f0;
+  --strong-color: #020617;
+}
+
+.dark {
+  --primary-color: #fcfffc;
+  --link-color: #197bbd;
+  --list-color: rgb(233, 229, 226);
+  --code-color: white;
+  --red-color: #ef4444;
+  --pre-bg-color: #1e293b;
+  --strong-color: white;
+}
+
+.Project {
+  width: 64%;
+  padding-top: 2rem;
+  margin-inline: auto;
+  position: relative;
+  display: flex;
+  flex-direction: column;
+  gap: 1rem;
+}
+@media screen and (max-width: 768px) {
+  .Project {
+    width: 90%;
+  }
+}
+.Project ul li {
+  margin-left: 40px; /* Adjust the value as needed */
+}
+.Project ul ul {
+  margin-left: 40px; /* Adjust the value as needed */
+}
+.Project__Content {
+  font-family: "Ubuntu";
+  display: flex;
+  flex-direction: column;
+  gap: 1rem;
+}
+.Project__Content a {
+  text-decoration: underline;
+  text-decoration-color: var(--primary-color);
+  text-decoration-thickness: 1px;
+  color: var(--primary-color);
+}
+.Project__Content pre {
+  background-color: var(--pre-bg-color);
+  padding: 1.5rem;
+  border-radius: 10px;
+  color: var(--code-color);
+  font-weight: 500;
+  max-width: 100%;
+  word-break: break-all;
+  white-space: pre-wrap;
+}
+.Project__Content strong {
+  color: var(--strong-color);
+}
+.Project__Content p {
+  color: var(--list-color);
+  font-size: 1.1rem;
+  font-weight: 500;
+  font-family: "Ubuntu", "Roboto";
+}
+@media screen and (max-width: 768px) {
+  .Project__Content p {
+    font-size: 1rem;
+  }
+}
+.Project__Content h6 {
+  font-size: 1.2rem;
+}
+.Project__Content h1 {
+  font-size: 2.7rem;
+  font-weight: 800;
+  width: -moz-fit-content;
+  width: fit-content;
+  color: var(--primary-color);
+  text-decoration-thickness: 3px;
+  font-family: "Ubuntu", "Roboto";
+}
+.Project__Content h1 :visited,
+.Project__Content h1 :active {
+  color: var(--primary-color);
+}
+@media screen and (max-width: 768px) {
+  .Project__Content h1 {
+    font-size: 2rem;
+  }
+}
+.Project__Content h2 {
+  font-size: 1.87rem;
+  font-weight: 700;
+  color: var(--primary-color);
+  font-family: "Ubuntu", "Roboto";
+}
+.Project__Content h2 :visited,
+.Project__Content h2 :active {
+  color: var(--primary-color);
+}
+@media screen and (max-width: 768px) {
+  .Project__Content h2 {
+    font-size: 1.4rem;
+  }
+}
+.Project__Content h4 {
+  font-size: 1.55rem;
+  font-weight: 600;
+  color: var(--primary-color);
+  font-family: "Ubuntu", "Roboto";
+}
+.Project__Content h4 :visited,
+.Project__Content h4 :active {
+  color: var(--primary-color);
+}
+@media screen and (max-width: 768px) {
+  .Project__Content h4 {
+    font-size: 1.2rem;
+  }
+}
+.Project__Content h5 {
+  color: var(--red-color);
+  font-weight: 700;
+  font-size: 1.2rem;
+}
+@media screen and (max-width: 768px) {
+  .Project__Content h5 {
+    font-size: 1rem;
+  }
+}
+.Project__Content ul,
+.Project__Content ol {
+  display: flex;
+  flex-direction: column;
+  gap: 1rem;
+}
+.Project__Content ul li,
+.Project__Content ol li {
+  font-size: 1.1rem;
+  font-weight: 400;
+  list-style: circle;
+  color: var(--list-color);
+  font-weight: 500;
+}
+@media screen and (max-width: 768px) {
+  .Project__Content ul li,
+  .Project__Content ol li {
+    font-size: 1rem;
+  }
+}
+@media screen and (max-width: 768px) {
+  .Project__Content ul li,
+  .Project__Content ol li {
+    font-size: 1rem;
+  }
+}/*# sourceMappingURL=Projects.module.css.map */
