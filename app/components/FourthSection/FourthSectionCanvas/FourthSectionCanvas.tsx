@@ -48,7 +48,7 @@ export default function FourthSectionCanvas() {
         isPhoneView ? -38 : -20,
       ]}
     >
-      <group position={[-6, 0, 4]}>
+      <group position={[-6, 4, 4]}>
         <Earth />
         <Moon />
       </group>

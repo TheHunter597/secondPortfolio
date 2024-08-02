@@ -1,5 +1,3 @@
-import { FaWhatsapp } from "react-icons/fa";
-import { BiLogoGmail } from "react-icons/bi";
 import Link from "next/link";
 import GmailIcon from "@/public/images/contact/Gmail.svg";
 import WhatsappIcon from "@/public/images/contact/Whatsapp.svg";

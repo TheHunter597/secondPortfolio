@@ -1,5 +1,6 @@
 .MainContactContainer {
   width: 40%;
+  max-width: 35rem;
   @media screen and (max-width: 1240px) and (min-width: 1001px) {
     width: 50%;
   }
@@ -22,7 +23,7 @@
 }
 .ContactMe {
   width: 80%;
-  @media screen and (max-width: 768px) {
+  @media screen and (max-width: 1000px) {
     width: 90%;
   }
   margin-inline: auto;

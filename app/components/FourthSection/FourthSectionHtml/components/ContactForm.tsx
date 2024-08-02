@@ -52,7 +52,7 @@ export default function ContactForm() {
       </div>
       {state.messageSent && (
         <p className="text-green-700 text-lg text-center font-semibold">
-          Message Sent Successfully
+          Message Sent Successfully 😊
         </p>
       )}
       {!state.messageSent ? (
