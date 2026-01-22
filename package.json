@@ -19,6 +19,7 @@
     "@prismicio/react": "2.7.4",
     "@react-three/drei": "9.105.6",
     "@react-three/fiber": "8.16.6",
+    "@supabase/supabase-js": "^2.91.0",
     "@types/three": "0.164.0",
     "@vercel/speed-insights": "1.0.10",
     "emailjs": "4.0.3",

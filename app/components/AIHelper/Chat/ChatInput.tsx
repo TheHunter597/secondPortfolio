@@ -37,6 +37,8 @@ export default function ChatInput({
         const response = await fetch('/api/ai-responses');
         if (response.ok) {
           const data = await response.json();
+          console.log({data});  
+          
           setLearnedQuestions(data.qa || []);
         }
       } catch (error) {

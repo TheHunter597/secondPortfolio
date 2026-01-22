@@ -1,7 +1,7 @@
 "use server";
-import { promises as fs } from "fs";
-import path from "path";
+import { supabaseAdmin } from "@/app/lib/supabase";
 import { checkIfQuestionExists, type PredefinedQA } from "../utils/fuzzySearch";
+import predefinedQuestions from "../data/predefinedQuestions.json";
 
 function capitalizeFirstLetter(value: string): string {
   if (!value) return value;
@@ -12,60 +12,53 @@ export async function saveQAAction(formData: FormData): Promise<{ saved: boolean
   try {
     const rawQuestion = (formData.get("question") as string) ?? "";
     const rawAnswer = (formData.get("answer") as string) ?? "";
-    console.log({rawQuestion,rawAnswer});
     
     const question = capitalizeFirstLetter(rawQuestion.trim());
     const answer = rawAnswer.trim();
-    console.log({question,answer});
     
     if (!question || !answer) {
       return { saved: false };
     }
 
-    const learnedFile = path.join(
-      process.cwd(),
-      "app/components/AIHelper/data/AIQuestionResponses.json"
-    );
-    console.log({learnedFile});
-    
-    const predefinedFile = path.join(
-      process.cwd(),
-      "app/components/AIHelper/data/predefinedQuestions.json"
-    );
-    console.log({predefinedFile});
-    // Load learned and predefined
-    let learned: { qa: PredefinedQA[] } = { qa: [] };
-    try {
-      const learnedContent = await fs.readFile(learnedFile, "utf-8");
-      learned = JSON.parse(learnedContent || "{\"qa\":[]}");
-    } catch {
-      learned = { qa: [] };
+    // Fetch existing learned data from Supabase
+    const { data: learnedData, error: fetchError } = await supabaseAdmin
+      .from("learned_data")
+      .select("question");
+
+    if (fetchError) {
+      console.error("Error fetching learned data:", fetchError);
+      return { saved: false };
     }
 
-    let predefined: { qa: PredefinedQA[] } = { qa: [] };
-    try {
-      const preContent = await fs.readFile(predefinedFile, "utf-8");
-      predefined = JSON.parse(preContent || "{\"qa\":[]}");
-    } catch {
-      predefined = { qa: [] };
-    }
+    const learnedQAs: PredefinedQA[] = (learnedData || []).map((item: any, idx: number) => ({
+      id: `learned-${idx}`,
+      question: item.question,
+      answer: "",
+    }));
 
-    // Check duplicates across learned and predefined (>= 0.7)
-    const existsLearned = checkIfQuestionExists(question, learned.qa || [], 0.7);
-    const existsPre = checkIfQuestionExists(question, predefined.qa || [], 0.7);
+    // Check duplicates: learned (>= 0.7) and predefined (>= 0.7)
+    const existsLearned = checkIfQuestionExists(question, learnedQAs, 0.7);
+    const existsPre = checkIfQuestionExists(question, predefinedQuestions.qa as PredefinedQA[], 0.7);
+
     if (existsLearned || existsPre) {
       return { saved: false };
     }
 
-    const newQA: PredefinedQA = {
-      id: `learned-${Date.now()}`,
-      question,
-      answer,
-    };
+    // Insert into Supabase
+    const { error: insertError } = await supabaseAdmin
+      .from("learned_data")
+      .insert({
+        id: `learned-${Date.now()}`,
+        question,
+        answer,
+        created_at: new Date().toISOString(),
+      });
 
-    const updated = { qa: [...(learned.qa || []), newQA] };
+    if (insertError) {
+      console.error("Error inserting learned data:", insertError);
+      return { saved: false };
+    }
 
-    await fs.writeFile(learnedFile, JSON.stringify(updated, null, 2), "utf-8");
     return { saved: true };
   } catch (err) {
     console.error("saveQAAction error:", err);

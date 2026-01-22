@@ -1,53 +1,31 @@
-import { NextRequest, NextResponse } from 'next/server';
-import { promises as fs } from 'fs';
-import path from 'path';
-
-const RESPONSES_FILE = path.join(
-  process.cwd(),
-  'app/components/AIHelper/data/AIQuestionResponses.json'
-);
+ export const revalidate = 10;
+import { NextResponse } from 'next/server';
+import { supabase } from '@/app/lib/supabase';
 
 export async function GET() {
   try {
-    const fileContent = await fs.readFile(RESPONSES_FILE, 'utf-8');
-    const safeContent = fileContent && fileContent.trim().length > 0 ? fileContent : '{"qa":[]}';
-    const data = JSON.parse(safeContent);
-    return NextResponse.json(data);
-  } catch (error) {
-    console.error('Error reading responses file:', error);
-    return NextResponse.json({ qa: [] });
-  }
-}
-
-export async function POST(request: NextRequest) {
-  try {
-    const body = await request.json();
-    const { qa } = body;
-
-
-    if (!Array.isArray(qa)) {
-      return NextResponse.json(
-        { error: 'Invalid data format' },
-        { status: 400 }
-      );
+    const { data, error } = await supabase
+      .from('learned_data')
+      .select('id, question, answer')
+      .order('created_at', { ascending: false });
+    console.log({data});
+    
+    if (error) {
+      console.error('Error fetching learned data:', error);
+      return NextResponse.json({ qa: [] });
     }
 
-    // Write to file
-    await fs.writeFile(
-      RESPONSES_FILE,
-      JSON.stringify({ qa }, null, 2),
-      'utf-8'
-    );
+    // Transform Supabase rows to QA format
+    const qa = (data || []).map((row: any) => ({
+      id: row.id,
+      question: row.question,
+      // Supabase stores answer as JSONB; normalize to string for the UI
+      answer: typeof row.answer === 'string' ? row.answer : row.answer?.text ?? '',
+    }));
 
-    return NextResponse.json({
-      success: true,
-      message: 'Responses saved successfully',
-    });
+    return NextResponse.json({ qa });
   } catch (error) {
-    console.error('Error saving responses:', error);
-    return NextResponse.json(
-      { error: 'Failed to save responses' },
-      { status: 500 }
-    );
+    console.error('Error in GET /api/ai-responses:', error);
+    return NextResponse.json({ qa: [] });
   }
 }
