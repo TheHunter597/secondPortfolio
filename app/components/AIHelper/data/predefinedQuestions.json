@@ -1,0 +1,145 @@
+{
+  "qa": [
+    {
+      "id": "who-are-you",
+      "question": "Who are you?",
+      "answer": "I am a full-stack developer with a strong systems-oriented mindset, shaped by a formal medical education. Medicine trained me to reason in terms of interacting systems, failure modes, probabilistic outcomes, and long-term consequences. Software development became a natural extension of that way of thinking. Over time, I moved from experimenting with code to designing and building complete, production-style systems that span frontend interfaces, backend services, databases, messaging infrastructure, and deployment environments. I approach software not as isolated features, but as living systems that must remain understandable and resilient as they evolve."
+    },
+    {
+      "id": "project-summary",
+      "question": "How would you describe your main project?",
+      "answer": "The project is a full-scale e-commerce platform built as a distributed system rather than a traditional monolith. Its purpose is not merely to sell products, but to demonstrate architectural decision-making across the entire stack. It includes user authentication, product management, carts, orders, asynchronous communication between services, and a modern frontend. Each part of the system is designed with clear boundaries, explicit contracts, and the assumption that components will fail independently. The project serves as a concrete exploration of how complex systems behave under real-world constraints."
+    },
+
+    {
+      "id": "frontend-skills",
+      "question": "What are your frontend skills?",
+      "answer": "On the frontend, I focus on building component-based systems that remain predictable as they scale. I work primarily with React and Next.js, using TypeScript to enforce correctness and improve maintainability. I place strong emphasis on state management, component composition, and separation of concerns. Styling and animation are treated as functional tools: Tailwind CSS for consistency and speed, Framer Motion for intentional motion, and Three.js when immersive or interactive elements genuinely improve the experience. My goal is to produce interfaces that are responsive, understandable, and resilient to future feature expansion."
+    },
+    {
+      "id": "frontend-architecture",
+      "question": "How do you think about frontend architecture?",
+      "answer": "I treat the frontend as a distributed client rather than a thin UI layer. It is responsible for managing long-lived state, handling partial failures, coordinating multiple backend services, and enforcing access control at the presentation level. This means carefully structuring components, minimizing implicit coupling, and designing data flows that are explicit and debuggable. Performance is approached systematically, avoiding unnecessary renders, over-fetching, and uncontrolled side effects."
+    },
+    {
+      "id": "backend-skills",
+      "question": "What are your backend skills?",
+      "answer": "I design and implement backend APIs using Node.js with Express, Django with Django REST Framework, and Java with Spring Boot. My focus is on correctness, clarity, and long-term maintainability rather than framework-specific cleverness. I pay close attention to request lifecycles, data validation, error handling, and security boundaries. APIs are designed as contracts that must remain stable even as internal implementations change."
+    },
+    {
+      "id": "databases",
+      "question": "How do you work with databases?",
+      "answer": "I view databases as architectural commitments rather than interchangeable storage engines. PostgreSQL is used where relational integrity, transactions, and complex queries are required. MongoDB is used when document-based modeling offers clearer alignment with the domain. Redis is introduced where low latency and ephemeral data are critical. In multi-database systems, I am careful to define ownership boundaries so that each service controls its own data and cross-service coupling is minimized."
+    },
+    {
+      "id": "microservices",
+      "question": "What do you understand about microservices architecture?",
+      "answer": "Microservices are primarily about organizational and cognitive scalability, not just technical separation. Each service should own its data, expose a narrow interface, and evolve independently. Communication between services should be explicit and ideally asynchronous. I am aware of the operational costs microservices introduce, including deployment complexity, observability challenges, and debugging overhead. As a result, I approach microservices as a deliberate trade-off rather than a default solution."
+    },
+    {
+      "id": "event-driven",
+      "question": "Why did you choose event-driven communication?",
+      "answer": "Event-driven communication reduces temporal coupling between services. By using Kafka, services can react to state changes without blocking on each other or requiring synchronous availability. This improves resilience and allows the system to scale more naturally. Even in a simplified deployment, the architectural benefits of event-driven design—loose coupling, replayability, and clearer system behavior—remain valuable."
+    },
+    {
+      "id": "authentication",
+      "question": "How do you handle authentication?",
+      "answer": "Authentication is centralized to establish a single source of identity, while authorization is handled locally by each service. Users authenticate once and receive a JWT that encodes their identity and permissions. Each service independently validates the token, avoiding runtime dependency on the authentication service. This design reduces latency, prevents cascading failures, and scales well. A concrete example of this approach can be found in the Django authentication implementation here: https://github.com/TheHunter597/djangoAuthApp"
+    },
+    {
+      "id": "shared-code",
+      "question": "How do you manage shared logic across services?",
+      "answer": "Shared logic is extracted into a common library rather than duplicated. This includes authentication helpers, Kafka abstractions, shared types, and standardized error handling. The goal is to enforce consistency while avoiding tight coupling. By versioning the shared library explicitly, services can adopt changes at their own pace. An example repository is available here: https://github.com/TheHunter597/jsCommonLibrary"
+    },
+    {
+      "id": "devops",
+      "question": "What is your experience with deployment and DevOps?",
+      "answer": "I containerize services using Docker and deploy them using Kubernetes. I have experience running distributed services, databases, and message brokers in a cloud environment, primarily on Azure. I understand the relationship between pods, deployments, services, and networking, and I am actively working on improving CI/CD automation using GitHub Actions."
+    },
+    {
+      "id": "medical-background",
+      "question": "How does your medical background influence your engineering approach?",
+      "answer": "Medicine trains you to reason under uncertainty, respect edge cases, and understand that small mistakes can propagate into serious outcomes. That mindset translates directly into software architecture. I am cautious about hidden assumptions, conscious of failure modes, and deliberate in documenting decisions. The disciplines reinforce each other rather than compete."
+    },
+    {
+      "id": "why-hire",
+      "question": "Why should someone hire you?",
+      "answer": "Because I do not treat software as a collection of disconnected tasks. I think in terms of systems, trade-offs, and long-term consequences. I am comfortable going deep where necessary, but also pragmatic enough to ship. The result is software that remains understandable and adaptable instead of collapsing under its own complexity."
+    },
+    {
+      "id": "why-microservices",
+      "question": "Why did you choose microservices instead of a monolithic architecture?",
+      "answer": "The decision to use microservices was intentional rather than fashionable. A monolith is often simpler initially, but it centralizes complexity and couples unrelated domains over time. I wanted to explore how separating responsibilities into independent services affects scalability, cognitive load, and system evolution. Microservices allowed me to enforce clear ownership boundaries, experiment with asynchronous workflows, and design for independent failure. I am fully aware of the operational overhead they introduce, which is why the architecture is deliberately constrained and documented rather than fragmented arbitrarily."
+    },
+    {
+      "id": "microservices-structure",
+      "question": "How is the microservices architecture structured?",
+      "answer": "Each service represents a distinct business capability rather than a technical layer. Services are isolated at the process and database level, deployed independently, and communicate through well-defined APIs or events. There is no shared database. Shared concerns such as authentication validation, messaging abstractions, and error standards are handled through versioned shared libraries instead of runtime dependencies. This structure prevents tight coupling while maintaining consistency across the system."
+    },
+    {
+      "id": "service-communication",
+      "question": "How do services communicate with each other?",
+      "answer": "The primary communication model is asynchronous and event-driven, implemented using Kafka. Services emit events when their internal state changes, and other services react to those events without direct coupling. Synchronous HTTP communication is used sparingly and only when immediate consistency is required. This hybrid approach balances responsiveness with resilience and avoids turning the system into a fragile chain of blocking calls."
+    },
+    {
+      "id": "event-flow",
+      "question": "Can you explain how an event flows through the system?",
+      "answer": "When a significant state change occurs within a service, such as a completed action or validated operation, the service publishes an event to Kafka. That event represents a fact, not a command. Other services subscribe to relevant event topics and react accordingly, updating their own state or triggering further processes. This creates a pipeline of reactions rather than a rigid execution chain. The system becomes easier to extend because new consumers can be added without modifying existing producers."
+    },
+    {
+      "id": "data-ownership",
+      "question": "How do you handle data ownership across microservices?",
+      "answer": "Each service owns its data completely. No other service reads or writes directly to another service’s database. If data is needed elsewhere, it is shared through events or exposed via a controlled API. This prevents hidden coupling and ensures that schema changes do not cascade unpredictably across the system. Data duplication is accepted where necessary, as consistency is maintained through event propagation rather than shared storage."
+    },
+    {
+      "id": "consistency-model",
+      "question": "How do you handle data consistency in a distributed system?",
+      "answer": "The system embraces eventual consistency rather than attempting to simulate strong consistency across services. Events are treated as the source of truth for state changes, and services reconcile their local state accordingly. This approach avoids distributed transactions and reduces system fragility. Where immediate consistency is required, synchronous communication is used explicitly and sparingly."
+    },
+    {
+      "id": "failure-handling",
+      "question": "What happens when one service fails?",
+      "answer": "Service failure is treated as a normal operating condition rather than an exception. Because services communicate asynchronously, a temporary failure does not immediately propagate through the system. Events can be replayed once the service recovers, and other services continue functioning independently. This design significantly reduces cascading failures and makes system behavior more predictable under stress."
+    },
+    {
+      "id": "auth-distributed",
+      "question": "How does authentication work across multiple services?",
+      "answer": "Authentication is centralized to establish identity, but authorization is decentralized. Users authenticate once and receive a JWT. Each service independently validates the token using shared logic, avoiding runtime dependency on the authentication service. This allows services to remain operational even if the auth service is temporarily unavailable. A reference implementation is available here: https://github.com/TheHunter597/djangoAuthApp"
+    },
+    {
+      "id": "shared-library-strategy",
+      "question": "Why did you use a shared library instead of duplicating logic?",
+      "answer": "Duplicating logic leads to divergence and subtle bugs over time. The shared library enforces consistency for cross-cutting concerns such as authentication helpers, Kafka producers and consumers, shared types, and standardized error handling. By versioning the library explicitly, services retain deployment independence while benefiting from shared standards. An example can be seen here: https://github.com/TheHunter597/jsCommonLibrary"
+    },
+    {
+      "id": "technology-diversity",
+      "question": "Why are multiple backend technologies used in the same system?",
+      "answer": "The system intentionally demonstrates polyglot architecture. Different technologies excel at different tasks, and microservices allow that diversity without forcing uniformity. What matters is not the language, but the contract between services. As long as interfaces are respected, internal implementations can evolve independently."
+    },
+    {
+      "id": "observability",
+      "question": "How do you debug and observe behavior in a distributed system?",
+      "answer": "Debugging distributed systems requires thinking in terms of events and timelines rather than call stacks. I rely on structured logging, clear event schemas, and well-defined service boundaries to trace behavior across components. The architecture itself is designed to make system behavior observable rather than opaque."
+    },
+    {
+      "id": "scalability",
+      "question": "How does this architecture scale?",
+      "answer": "Services can scale independently based on load characteristics. Event-driven communication allows throughput to increase without increasing coupling. Stateless services scale horizontally, while databases and message brokers are scaled according to their specific access patterns. Scalability is treated as an architectural property rather than an afterthought."
+    },
+    {
+      "id": "trade-offs",
+      "question": "What are the main trade-offs of this architecture?",
+      "answer": "The primary trade-off is complexity. Microservices introduce operational overhead, deployment coordination challenges, and debugging difficulty. The architecture deliberately accepts this cost in exchange for clearer boundaries, better scalability, and long-term maintainability. This is not an architecture for small, static systems."
+    },
+    {
+      "id": "lessons-learned",
+      "question": "What did building a microservices system teach you?",
+      "answer": "That architecture decisions echo far longer than implementation details. Clear boundaries reduce cognitive load. Poor abstractions spread silently. Event-driven systems reward patience and discipline. Most importantly, complexity must be justified continuously, not assumed to be virtuous."
+    },
+    {
+      "id": "future-improvements",
+      "question": "What would you improve if you continued this project?",
+      "answer": "I would strengthen observability tooling, refine CI/CD automation, introduce more formal schema versioning for events, and improve documentation around architectural decisions. The technical foundation is solid; the next gains are primarily in operational maturity."
+    }
+  ]
+}

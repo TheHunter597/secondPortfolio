@@ -2,14 +2,17 @@
 
 import { useState, useRef, useEffect } from "react";
 import type { Message } from "./AIHelper";
+import type { PredefinedQA } from "./utils/fuzzySearch";
 import ChatMessage from "./ChatMessage";
 import ChatInput from "./ChatInput";
 import IdentificationModal from "./IdentificationModal";
 import "./ChatWindow.scss";
 
-interface ChatWindowProps {
+export interface ChatWindowProps {
   messages: Message[];
   onSendMessage: (text: string) => void;
+  onSuggestionSelected?: (qa: PredefinedQA) => void;
+  learnedVersion?: number;
   onClose: () => void;
   isLoading: boolean;
   messagesEndRef: React.RefObject<HTMLDivElement>;
@@ -21,6 +24,8 @@ interface ChatWindowProps {
 export default function ChatWindow({
   messages,
   onSendMessage,
+  onSuggestionSelected,
+  learnedVersion,
   onClose,
   isLoading,
   messagesEndRef,
@@ -114,6 +119,8 @@ export default function ChatWindow({
 
       <ChatInput
         onSendMessage={onSendMessage}
+        onSuggestionSelect={onSuggestionSelected}
+        learnedVersion={learnedVersion ?? 0}
         isLoading={isLoading}
         messagesRef={messagesEndRef}
       />
