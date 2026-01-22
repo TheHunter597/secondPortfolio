@@ -9,86 +9,86 @@ importers:
   .:
     dependencies:
       '@emailjs/browser':
-        specifier: ^4.3.3
+        specifier: 4.3.3
         version: 4.3.3
       '@next/bundle-analyzer':
-        specifier: ^14.2.3
+        specifier: 14.2.3
         version: 14.2.3
       '@prismicio/client':
-        specifier: ^7.5.0
+        specifier: 7.5.0
         version: 7.5.0
       '@prismicio/next':
-        specifier: ^1.5.0
+        specifier: 1.5.0
         version: 1.5.0(@prismicio/client@7.5.0)(next@14.2.3(react-dom@18.3.1(react@18.3.1))(react@18.3.1)(sass@1.77.1))(react@18.3.1)
       '@prismicio/react':
-        specifier: ^2.7.4
+        specifier: 2.7.4
         version: 2.7.4(@prismicio/client@7.5.0)(react@18.3.1)
       '@react-three/drei':
-        specifier: ^9.105.6
+        specifier: 9.105.6
         version: 9.105.6(@react-three/fiber@8.16.6(react-dom@18.3.1(react@18.3.1))(react@18.3.1)(three@0.164.1))(@types/react@18.3.2)(@types/three@0.164.0)(react-dom@18.3.1(react@18.3.1))(react@18.3.1)(three@0.164.1)
       '@react-three/fiber':
-        specifier: ^8.16.6
+        specifier: 8.16.6
         version: 8.16.6(react-dom@18.3.1(react@18.3.1))(react@18.3.1)(three@0.164.1)
       '@types/three':
-        specifier: ^0.164.0
+        specifier: 0.164.0
         version: 0.164.0
       '@vercel/speed-insights':
-        specifier: ^1.0.10
+        specifier: 1.0.10
         version: 1.0.10(next@14.2.3(react-dom@18.3.1(react@18.3.1))(react@18.3.1)(sass@1.77.1))(react@18.3.1)
       emailjs:
-        specifier: ^4.0.3
+        specifier: 4.0.3
         version: 4.0.3(typescript@5.4.5)
       framer-motion:
-        specifier: ^11.1.9
+        specifier: 11.1.9
         version: 11.1.9(@emotion/is-prop-valid@1.2.2)(react-dom@18.3.1(react@18.3.1))(react@18.3.1)
       gsap:
-        specifier: ^3.12.5
+        specifier: 3.12.5
         version: 3.12.5
       lenis:
-        specifier: ^1.1.2
+        specifier: 1.1.2
         version: 1.1.2(react-dom@18.3.1(react@18.3.1))(react@18.3.1)
       next:
         specifier: 14.2.3
         version: 14.2.3(react-dom@18.3.1(react@18.3.1))(react@18.3.1)(sass@1.77.1)
       react:
-        specifier: ^18
+        specifier: '18'
         version: 18.3.1
       react-dom:
-        specifier: ^18
+        specifier: '18'
         version: 18.3.1(react@18.3.1)
       react-icons:
-        specifier: ^5.2.1
+        specifier: 5.2.1
         version: 5.2.1(react@18.3.1)
       react-loader-spinner:
-        specifier: ^6.1.6
+        specifier: 6.1.6
         version: 6.1.6(react-dom@18.3.1(react@18.3.1))(react@18.3.1)
       react-markdown:
-        specifier: ^10.1.0
+        specifier: 10.1.0
         version: 10.1.0(@types/react@18.3.2)(react@18.3.1)
       react-type-animation:
-        specifier: ^3.2.0
+        specifier: 3.2.0
         version: 3.2.0(prop-types@15.8.1)(react-dom@18.3.1(react@18.3.1))(react@18.3.1)
       rehype-raw:
-        specifier: ^7.0.0
+        specifier: 7.0.0
         version: 7.0.0
       remark-gfm:
-        specifier: ^4.0.1
+        specifier: 4.0.1
         version: 4.0.1
       sass:
-        specifier: ^1.77.1
+        specifier: 1.77.1
         version: 1.77.1
       sharp:
-        specifier: ^0.33.4
+        specifier: 0.33.4
         version: 0.33.4
       three:
-        specifier: ^0.164.1
+        specifier: 0.164.1
         version: 0.164.1
     devDependencies:
       '@slicemachine/adapter-next':
-        specifier: ^0.3.40
+        specifier: 0.3.40
         version: 0.3.40(@prismicio/client@7.5.0)(@prismicio/types@0.2.9)(@types/uuid@9.0.8)(next@14.2.3(react-dom@18.3.1(react@18.3.1))(react@18.3.1)(sass@1.77.1))(react@18.3.1)(uuid@9.0.1)
       '@types/node':
-        specifier: ^20
+        specifier: '20'
         version: 20.12.11
       '@types/react':
         specifier: ^18
@@ -134,6 +134,7 @@ packages:
 
   '@darkroom.engineering/tempus@0.0.46':
     resolution: {integrity: sha512-s5vav3KMHYezvUCl4ee5epg0oimF6M8C9gAaKxFnFaTvX2q3ywFDryIv6XLd0mRFUt3S1uHDJqKaiEcs2ZVSvw==}
+    deprecated: 'The ''@darkroom.engineering/tempus'' package has been renamed to ''tempus''. Please update your dependencies: npm install tempus and visit the documentation: https://www.npmjs.com/package/tempus'
 
   '@discoveryjs/json-ext@0.5.7':
     resolution: {integrity: sha512-dBVuXR082gk3jsFp7Rd/JI4kytwGHecnCoTtXFb7DB6CNHp4rg5k1bhg0nWdLGLnOV71lmDzGQaLMy8iPLY0pw==}
@@ -4553,7 +4554,7 @@ snapshots:
       eslint: 8.57.0
       eslint-import-resolver-node: 0.3.9
       eslint-import-resolver-typescript: 3.6.1(@typescript-eslint/parser@7.2.0(eslint@8.57.0)(typescript@5.4.5))(eslint-import-resolver-node@0.3.9)(eslint-plugin-import@2.29.1(eslint@8.57.0))(eslint@8.57.0)
-      eslint-plugin-import: 2.29.1(@typescript-eslint/parser@7.2.0(eslint@8.57.0)(typescript@5.4.5))(eslint-import-resolver-typescript@3.6.1(@typescript-eslint/parser@7.2.0(eslint@8.57.0)(typescript@5.4.5))(eslint-import-resolver-node@0.3.9)(eslint-plugin-import@2.29.1(eslint@8.57.0))(eslint@8.57.0))(eslint@8.57.0)
+      eslint-plugin-import: 2.29.1(@typescript-eslint/parser@7.2.0(eslint@8.57.0)(typescript@5.4.5))(eslint-import-resolver-typescript@3.6.1)(eslint@8.57.0)
       eslint-plugin-jsx-a11y: 6.8.0(eslint@8.57.0)
       eslint-plugin-react: 7.34.1(eslint@8.57.0)
       eslint-plugin-react-hooks: 4.6.2(eslint@8.57.0)
@@ -4577,7 +4578,7 @@ snapshots:
       enhanced-resolve: 5.16.1
       eslint: 8.57.0
       eslint-module-utils: 2.8.1(@typescript-eslint/parser@7.2.0(eslint@8.57.0)(typescript@5.4.5))(eslint-import-resolver-node@0.3.9)(eslint-import-resolver-typescript@3.6.1(@typescript-eslint/parser@7.2.0(eslint@8.57.0)(typescript@5.4.5))(eslint-import-resolver-node@0.3.9)(eslint-plugin-import@2.29.1(eslint@8.57.0))(eslint@8.57.0))(eslint@8.57.0)
-      eslint-plugin-import: 2.29.1(@typescript-eslint/parser@7.2.0(eslint@8.57.0)(typescript@5.4.5))(eslint-import-resolver-typescript@3.6.1(@typescript-eslint/parser@7.2.0(eslint@8.57.0)(typescript@5.4.5))(eslint-import-resolver-node@0.3.9)(eslint-plugin-import@2.29.1(eslint@8.57.0))(eslint@8.57.0))(eslint@8.57.0)
+      eslint-plugin-import: 2.29.1(@typescript-eslint/parser@7.2.0(eslint@8.57.0)(typescript@5.4.5))(eslint-import-resolver-typescript@3.6.1)(eslint@8.57.0)
       fast-glob: 3.3.2
       get-tsconfig: 4.7.5
       is-core-module: 2.13.1
@@ -4599,7 +4600,7 @@ snapshots:
     transitivePeerDependencies:
       - supports-color
 
-  eslint-plugin-import@2.29.1(@typescript-eslint/parser@7.2.0(eslint@8.57.0)(typescript@5.4.5))(eslint-import-resolver-typescript@3.6.1(@typescript-eslint/parser@7.2.0(eslint@8.57.0)(typescript@5.4.5))(eslint-import-resolver-node@0.3.9)(eslint-plugin-import@2.29.1(eslint@8.57.0))(eslint@8.57.0))(eslint@8.57.0):
+  eslint-plugin-import@2.29.1(@typescript-eslint/parser@7.2.0(eslint@8.57.0)(typescript@5.4.5))(eslint-import-resolver-typescript@3.6.1)(eslint@8.57.0):
     dependencies:
       array-includes: 3.1.8
       array.prototype.findlastindex: 1.2.5

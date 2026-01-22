@@ -1,19 +1,30 @@
 "use client";
 
-import { useState, KeyboardEvent } from "react";
+import { useState, KeyboardEvent, useRef, useEffect } from "react";
 import "./ChatInput.scss";
+import { flushSync } from "react-dom";
 
 interface ChatInputProps {
   onSendMessage: (text: string) => void;
   isLoading: boolean;
+  messagesRef: React.RefObject<HTMLDivElement>;
 }
 
 export default function ChatInput({
   onSendMessage,
   isLoading,
+  messagesRef,
 }: ChatInputProps) {
   const [inputValue, setInputValue] = useState("");
+  const [useUpdate, setUseUpdate] = useState(false);
+  const inputRef = useRef<HTMLTextAreaElement>(null);
 
+  useEffect(() => {
+    // Blur the input when component mounts to prevent autofocus
+    if (inputRef.current) {
+      inputRef.current.blur();
+    }
+  }, []);
   const handleSend = () => {
     if (inputValue.trim() && !isLoading) {
       onSendMessage(inputValue.trim());
@@ -31,6 +42,8 @@ export default function ChatInput({
   return (
     <div className="chat-input-container">
       <textarea
+        ref={inputRef}
+        name="message"
         className="chat-input"
         placeholder="Type your message..."
         value={inputValue}
@@ -38,12 +51,25 @@ export default function ChatInput({
         onKeyDown={handleKeyPress}
         disabled={isLoading}
         rows={1}
+        autoFocus={false}
       />
       <button
         className="send-button"
-        onClick={handleSend}
+        onClick={()=>{
+          handleSend();
+          flushSync(()=>{
+            setUseUpdate(true);
+          })
+          
+          messagesRef.current?.scrollIntoView({
+            behavior: "smooth",
+            block: "end",
+          });
+     
+        }}
         disabled={!inputValue.trim() || isLoading}
         aria-label="Send message"
+
       >
         <svg
           xmlns="http://www.w3.org/2000/svg"

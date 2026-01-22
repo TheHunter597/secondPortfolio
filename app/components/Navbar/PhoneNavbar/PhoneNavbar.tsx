@@ -8,8 +8,8 @@ import NavElements from "../DesktopNavbar/NavElements";
 export default function PhoneNavbar() {
   const [active, setActive] = useState(false);
   return (
-    <header className="block md:hidden py-2 w-full fixed top-0 z-50">
-      <ul className="w-11/12 md:w-8/12 mx-auto flex flex-row justify-between relative z-50">
+    <header className="block lg:hidden py-2 w-full fixed top-0 z-50">
+      <ul className="w-11/12 lg:w-8/12 mx-auto flex flex-row justify-between relative z-50">
         <li>
           <Image
             src={"/images/logo-no-background.svg"}

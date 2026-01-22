@@ -4,6 +4,7 @@ import { useState, useRef, useEffect } from "react";
 import type { Message } from "./AIHelper";
 import ChatMessage from "./ChatMessage";
 import ChatInput from "./ChatInput";
+import IdentificationModal from "./IdentificationModal";
 import "./ChatWindow.scss";
 
 interface ChatWindowProps {
@@ -11,6 +12,10 @@ interface ChatWindowProps {
   onSendMessage: (text: string) => void;
   onClose: () => void;
   isLoading: boolean;
+  messagesEndRef: React.RefObject<HTMLDivElement>;
+  showIdentificationModal: boolean;
+  onIdentifierSubmit: (identifier: string) => void;
+  onSkipIdentification: () => void;
 }
 
 export default function ChatWindow({
@@ -18,18 +23,19 @@ export default function ChatWindow({
   onSendMessage,
   onClose,
   isLoading,
+  messagesEndRef,
+  showIdentificationModal,
+  onIdentifierSubmit,
+  onSkipIdentification,
 }: ChatWindowProps) {
-  const messagesEndRef = useRef<HTMLDivElement>(null);
-
-  const scrollToBottom = () => {
-    messagesEndRef.current?.scrollIntoView({ behavior: "smooth" });
-  };
-  useEffect(() => {
-    scrollToBottom();
-  }, [messages]);
-
   return (
     <div className="chat-window">
+      {showIdentificationModal && (
+        <IdentificationModal
+          onSubmit={onIdentifierSubmit}
+          onSkip={onSkipIdentification}
+        />
+      )}
       <div className="chat-header">
         <div className="chat-header-content">
           <div className="chat-avatar">
@@ -86,7 +92,10 @@ export default function ChatWindow({
               </svg>
             </div>
             <h4>Welcome to AI Helper!</h4>
-            <p>I am an AI assistant Trained on Mohamed Hossam CV and Portfolio also his projects and skills</p>
+            <p>
+              I am an AI assistant trained on Mohamed Hossam's portfolio and
+              projects.
+            </p>
           </div>
         ) : (
           messages.map((message) => (
@@ -103,7 +112,12 @@ export default function ChatWindow({
         <div ref={messagesEndRef} />
       </div>
 
-      <ChatInput onSendMessage={onSendMessage} isLoading={isLoading} />
+      <ChatInput
+        onSendMessage={onSendMessage}
+        isLoading={isLoading}
+        messagesRef={messagesEndRef}
+      />
     </div>
   );
 }
+
