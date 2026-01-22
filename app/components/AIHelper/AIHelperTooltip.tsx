@@ -67,7 +67,7 @@ export default function AIHelperTooltip({
     <div className="ai-helper-tooltip">
       <div className="tooltip-content">
         <p>
-          This is an AI trained on <strong>Mohamed Hossam's</strong> skills and
+          This is an AI trained on <strong>Mohamed Hossam&apos;s</strong> skills and
           projects. Open it and ask about anything you want to know!
         </p>
       </div>

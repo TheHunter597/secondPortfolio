@@ -93,7 +93,7 @@ export default function ChatWindow({
             </div>
             <h4>Welcome to AI Helper!</h4>
             <p>
-              I am an AI assistant trained on Mohamed Hossam's portfolio and
+              I am an AI assistant trained on Mohamed Hossam&apos;s portfolio and
               projects.
             </p>
           </div>
