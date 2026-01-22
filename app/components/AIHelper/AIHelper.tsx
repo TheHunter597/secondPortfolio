@@ -138,6 +138,9 @@ export default function AIHelper() {
         messageText = data.message;
       }
 
+      // Replace literal \n with actual newlines for proper markdown rendering
+      messageText = messageText.replace(/\\n/g, '\n');
+
       // Add AI response
       const aiMessage: Message = {
         id: (Date.now() + 1).toString(),

@@ -8,7 +8,6 @@ export async function GET() {
       .from('learned_data')
       .select('id, question, answer')
       .order('created_at', { ascending: false });
-    console.log({data});
     
     if (error) {
       console.error('Error fetching learned data:', error);
@@ -16,12 +15,18 @@ export async function GET() {
     }
 
     // Transform Supabase rows to QA format
-    const qa = (data || []).map((row: any) => ({
-      id: row.id,
-      question: row.question,
-      // Supabase stores answer as JSONB; normalize to string for the UI
-      answer: typeof row.answer === 'string' ? row.answer : row.answer?.text ?? '',
-    }));
+    const qa = (data || []).map((row: any) => {
+      let answerText = typeof row.answer === 'string' ? row.answer : row.answer?.text ?? '';
+      
+      // Replace literal \n with actual newlines for proper markdown rendering
+      answerText = answerText.replace(/\\n/g, '\n');
+      
+      return {
+        id: row.id,
+        question: row.question,
+        answer: answerText,
+      };
+    });
 
     return NextResponse.json({ qa });
   } catch (error) {
