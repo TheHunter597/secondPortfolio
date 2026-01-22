@@ -2,15 +2,19 @@
 
 import { useRef, useState} from "react";
 import AIHelperButton from "./AIHelperButton";
-import ChatWindow from "./ChatWindow";
-import AIHelperTooltip from "./AIHelperTooltip";
+import ChatWindow, { type ChatWindowProps } from "./Chat/ChatWindow";
+import AIHelperTooltip from "./addons/AIHelperTooltip";
 import "./AIHelper.scss";
+import { type PredefinedQA } from "./utils/fuzzySearch";
+import { saveQAAction } from "./actions/saveQAAction";
+import { flushSync } from "react-dom";
 
 export interface Message {
   id: string;
   text: string;
   sender: "user" | "ai";
   timestamp: Date;
+  isPredefined?: boolean;
 }
 
 // Function to generate random 12-character string
@@ -31,6 +35,10 @@ export default function AIHelper() {
   const [userId, setUserId] = useState<string | null>(null);
   const [showIdentificationModal, setShowIdentificationModal] = useState(false);
   const [showTooltip, setShowTooltip] = useState(true);
+  const [learnedVersion, setLearnedVersion] = useState(0);
+  const saveFormRef = useRef<HTMLFormElement>(null);
+  const [pendingQuestion, setPendingQuestion] = useState<string>("");
+  const [pendingAnswer, setPendingAnswer] = useState<string>("");
   const messagesEndRef = useRef<HTMLDivElement>(null);
 
   // const initialState =  {id:"",text:"",sender:"ai",timestamp:new Date()} as const ;
@@ -39,7 +47,6 @@ export default function AIHelper() {
 
   const toggleChat = () => {
     if (!isOpen && !userId) {
-      // Show identification modal when opening chat for the first time
       setShowIdentificationModal(true);
     }
     setIsOpen(!isOpen);
@@ -62,9 +69,32 @@ export default function AIHelper() {
     setShowTooltip(false);
   };
 
+  const handleSuggestionSelected = (qa: PredefinedQA) => {
+    const userMessage: Message = {
+      id: Date.now().toString(),
+      text: qa.question,
+      sender: "user",
+      timestamp: new Date(),
+    };
+
+    setMessages((prev) => [...prev, userMessage]);
+    setIsLoading(true);
+
+    const aiMessage: Message = {
+      id: (Date.now() + 1).toString(),
+      text: qa.answer,
+      sender: "ai",
+      timestamp: new Date(),
+      isPredefined: true,
+    };
+    
+    setTimeout(() => {
+      setMessages((prev) => [...prev, aiMessage]);
+      setIsLoading(false);
+    }, 300);
+  };
 
   const sendMessage = async (text: string) => {
-    // Add user message
     const userMessage: Message = {
       id: Date.now().toString(),
       text,
@@ -90,7 +120,6 @@ export default function AIHelper() {
 
       const data = await response.json();
 
-      // Parse the n8n response format: { "response": "..." }
       let messageText = "Thank you for your message!";
 
       if (data.response) {
@@ -109,6 +138,9 @@ export default function AIHelper() {
         messageText = data.message;
       }
 
+      // Replace literal \n with actual newlines for proper markdown rendering
+      messageText = messageText.replace(/\\n/g, '\n');
+
       // Add AI response
       const aiMessage: Message = {
         id: (Date.now() + 1).toString(),
@@ -117,6 +149,20 @@ export default function AIHelper() {
         timestamp: new Date(),
       };
       setMessages((prev) => [...prev, aiMessage]);
+
+      // Submit hidden server action form to save directly to file
+      try {
+        flushSync(()=>{
+          setPendingQuestion(text);
+          setPendingAnswer(messageText);
+        })
+        // Programmatically submit server action form
+        saveFormRef.current?.requestSubmit();
+        // Optimistically bump learned version so suggestions can refresh
+        setLearnedVersion((v) => v + 1);
+      } catch (saveError) {
+        console.error('Error triggering save action:', saveError);
+      }
 
       await new Promise((resolve) => setTimeout(resolve, 1000));
 
@@ -135,16 +181,25 @@ export default function AIHelper() {
 
   return (
     <div className="ai-helper-container ">
+      {/* Hidden form to save Q&A directly via server action without API */}
+      <form action={saveQAAction} ref={saveFormRef} style={{ display: "none" }}>
+        <input type="hidden" name="question" value={pendingQuestion} />
+        <input type="hidden" name="answer" value={pendingAnswer} />
+      </form>
       {isOpen && (
         <ChatWindow
-          messages={messages}
-          onSendMessage={sendMessage}
-          onClose={toggleChat}
-          isLoading={isLoading}
-          messagesEndRef={messagesEndRef}
-          showIdentificationModal={showIdentificationModal}
-          onIdentifierSubmit={handleIdentifierSubmit}
-          onSkipIdentification={handleSkipIdentification}
+          {...({
+            messages,
+            onSendMessage: sendMessage,
+            onSuggestionSelected: handleSuggestionSelected,
+            learnedVersion,
+            onClose: toggleChat,
+            isLoading,
+            messagesEndRef,
+            showIdentificationModal,
+            onIdentifierSubmit: handleIdentifierSubmit,
+            onSkipIdentification: handleSkipIdentification,
+          } satisfies ChatWindowProps)}
         />
       )}
         <AIHelperTooltip onNeverShowAgain={handleTooltipNeverShowAgain} />
