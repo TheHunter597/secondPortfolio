@@ -1,3 +1,4 @@
+export const revalidate = 600;
 import { Metadata } from "next";
 import { notFound } from "next/navigation";
 import { SliceZone } from "@prismicio/react";

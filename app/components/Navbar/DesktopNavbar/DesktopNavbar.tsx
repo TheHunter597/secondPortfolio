@@ -3,7 +3,7 @@ import NavElements from "./NavElements";
 
 export default function DesktopNavbar() {
   return (
-    <div className="md:flex md:flex-row md:gap-8 md:justify-center w-full hidden">
+    <div className="lg:flex lg:flex-row lg:gap-8 lg:justify-center w-full hidden">
       <div>
         <Image
           src={"/images/logo-no-background.svg"}

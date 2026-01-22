@@ -1,6 +1,6 @@
 "use client";
 
-import { useState } from "react";
+import React, { useState } from "react";
 import HeaderElement from "./HeaderElement";
 import { LazyMotion, domAnimation } from "framer-motion";
 
@@ -56,14 +56,22 @@ export default function NavElements({
           {leftSideElementsResult}
         </LazyMotion>
       </ul>
-      <ul>
+      <ul className="flex flex-row h-fit gap-4">
         <a
           download="Portfolio.pdf"
-          href="/Portfolio.pdf"
+          href="/files/Portfolio.pdf"
           className="px-4 py-2 bg-red-500 text-white font-bold text-md  cursor-pointer
         hover:bg-transparent hover:text-red-500 border border-red-500 duration-300"
         >
           Download CV
+        </a>
+        <a
+          href="/files/Portfolio.pdf"
+          target="_blank"
+          className="px-4 py-2 bg-blue-500 text-white font-bold text-md  cursor-pointer
+        hover:bg-transparent hover:text-red-500 border border-blue-500 duration-300"
+        >
+          View
         </a>
       </ul>
     </div>
