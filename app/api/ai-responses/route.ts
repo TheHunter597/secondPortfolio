@@ -10,7 +10,8 @@ const RESPONSES_FILE = path.join(
 export async function GET() {
   try {
     const fileContent = await fs.readFile(RESPONSES_FILE, 'utf-8');
-    const data = JSON.parse(fileContent);
+    const safeContent = fileContent && fileContent.trim().length > 0 ? fileContent : '{"qa":[]}';
+    const data = JSON.parse(safeContent);
     return NextResponse.json(data);
   } catch (error) {
     console.error('Error reading responses file:', error);

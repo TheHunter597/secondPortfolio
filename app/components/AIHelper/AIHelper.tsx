@@ -6,7 +6,8 @@ import ChatWindow, { type ChatWindowProps } from "./Chat/ChatWindow";
 import AIHelperTooltip from "./addons/AIHelperTooltip";
 import "./AIHelper.scss";
 import { type PredefinedQA } from "./utils/fuzzySearch";
-import { saveNewResponse } from "./utils/saveResponse";
+import { saveQAAction } from "./actions/saveQAAction";
+import { flushSync } from "react-dom";
 
 export interface Message {
   id: string;
@@ -35,6 +36,9 @@ export default function AIHelper() {
   const [showIdentificationModal, setShowIdentificationModal] = useState(false);
   const [showTooltip, setShowTooltip] = useState(true);
   const [learnedVersion, setLearnedVersion] = useState(0);
+  const saveFormRef = useRef<HTMLFormElement>(null);
+  const [pendingQuestion, setPendingQuestion] = useState<string>("");
+  const [pendingAnswer, setPendingAnswer] = useState<string>("");
   const messagesEndRef = useRef<HTMLDivElement>(null);
 
   // const initialState =  {id:"",text:"",sender:"ai",timestamp:new Date()} as const ;
@@ -143,23 +147,18 @@ export default function AIHelper() {
       };
       setMessages((prev) => [...prev, aiMessage]);
 
-      // Save the new Q&A pair to learned responses
+      // Submit hidden server action form to save directly to file
       try {
-        // First load existing learned questions
-        const learnedResponse = await fetch('/api/ai-responses');
-        if (learnedResponse.ok) {
-          const learnedData = await learnedResponse.json();
-          const existingQuestions = learnedData.qa || [];
-          
-          // Save the new response
-          const saved = await saveNewResponse(text, messageText, existingQuestions);
-          if (saved) {
-            setLearnedVersion((v) => v + 1);
-          }
-        }
+        flushSync(()=>{
+          setPendingQuestion(text);
+          setPendingAnswer(messageText);
+        })
+        // Programmatically submit server action form
+        saveFormRef.current?.requestSubmit();
+        // Optimistically bump learned version so suggestions can refresh
+        setLearnedVersion((v) => v + 1);
       } catch (saveError) {
-        console.error('Error saving response:', saveError);
-        // Continue regardless of save error - don't break the chat experience
+        console.error('Error triggering save action:', saveError);
       }
 
       await new Promise((resolve) => setTimeout(resolve, 1000));
@@ -179,6 +178,11 @@ export default function AIHelper() {
 
   return (
     <div className="ai-helper-container ">
+      {/* Hidden form to save Q&A directly via server action without API */}
+      <form action={saveQAAction} ref={saveFormRef} style={{ display: "none" }}>
+        <input type="hidden" name="question" value={pendingQuestion} />
+        <input type="hidden" name="answer" value={pendingAnswer} />
+      </form>
       {isOpen && (
         <ChatWindow
           {...({

@@ -93,12 +93,31 @@ export default function ChatInput({
   };
 
   const handleSend = () => {
-    if (inputValue.trim() && !isLoading) {
-      onSendMessage(inputValue.trim());
-      setInputValue("");
+    const trimmed = inputValue.trim();
+    if (!trimmed || isLoading) return;
+
+    // If there's a very strong match (>=95%), use the stored answer instead of calling the AI
+    const strongMatches = fuzzySearchAll(
+      trimmed,
+      predefinedQuestions.qa as PredefinedQA[],
+      learnedQuestions,
+      0.90,
+      1
+    );
+
+    const topMatch = strongMatches[0];
+    if (topMatch && topMatch.score >= 0.90 && onSuggestionSelect) {
+      setInputValue(topMatch.qa.question);
       setSuggestions([]);
       setShowSuggestions(false);
+      onSuggestionSelect(topMatch.qa);
+      return;
     }
+
+    onSendMessage(trimmed);
+    setInputValue("");
+    setSuggestions([]);
+    setShowSuggestions(false);
   };
 
   const handleSuggestionClick = (qa: PredefinedQA) => {
