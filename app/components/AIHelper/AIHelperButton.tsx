@@ -13,9 +13,11 @@ export default function AIHelperButton({
 }: AIHelperButtonProps) {
   return (
     <div className="ai-helper-button-wrapper">
-      {!isOpen && <span className="ai-helper-label cursor-pointer"
-              onClick={onClick}
-      >Open AI Helper</span>}
+      {!isOpen && (
+        <span className="ai-helper-label cursor-pointer" onClick={onClick}>
+          Open AI Helper
+        </span>
+      )}
       <button
         className={`ai-helper-button ${isOpen ? "open" : ""}`}
         onClick={onClick}

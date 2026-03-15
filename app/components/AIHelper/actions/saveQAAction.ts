@@ -8,19 +8,20 @@ function capitalizeFirstLetter(value: string): string {
   return value.charAt(0).toUpperCase() + value.slice(1);
 }
 
-export async function saveQAAction(formData: FormData): Promise<{ saved: boolean }>{
+export async function saveQAAction(
+  formData: FormData,
+): Promise<{ saved: boolean }> {
   try {
     const rawQuestion = (formData.get("question") as string) ?? "";
     const rawAnswer = (formData.get("answer") as string) ?? "";
-    
+
     const question = capitalizeFirstLetter(rawQuestion.trim());
     const answer = rawAnswer.trim();
-    
+
     if (!question || !answer) {
       return { saved: false };
     }
 
-    // Fetch existing learned data from Supabase
     const { data: learnedData, error: fetchError } = await supabaseAdmin
       .from("learned_data")
       .select("question");
@@ -30,15 +31,21 @@ export async function saveQAAction(formData: FormData): Promise<{ saved: boolean
       return { saved: false };
     }
 
-    const learnedQAs: PredefinedQA[] = (learnedData || []).map((item: any, idx: number) => ({
-      id: `learned-${idx}`,
-      question: item.question,
-      answer: "",
-    }));
+    const learnedQAs: PredefinedQA[] = (learnedData || []).map(
+      (item: any, idx: number) => ({
+        id: `learned-${idx}`,
+        question: item.question,
+        answer: "",
+      }),
+    );
 
-    // Check duplicates: learned (>= 0.7) and predefined (>= 0.7)
-    const existsLearned = checkIfQuestionExists(question, learnedQAs, 0.7);
-    const existsPre = checkIfQuestionExists(question, predefinedQuestions.qa as PredefinedQA[], 0.7);
+    // Check duplicates: learned (>= 0.9) and predefined (>= 0.9)
+    const existsLearned = checkIfQuestionExists(question, learnedQAs, 0.9);
+    const existsPre = checkIfQuestionExists(
+      question,
+      predefinedQuestions.qa as PredefinedQA[],
+      0.9,
+    );
 
     if (existsLearned || existsPre) {
       return { saved: false };

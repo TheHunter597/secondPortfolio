@@ -1,12 +1,13 @@
 "use client";
 
-import { useRef, useState} from "react";
+import { useRef, useState } from "react";
 import AIHelperButton from "./AIHelperButton";
 import ChatWindow, { type ChatWindowProps } from "./Chat/ChatWindow";
 import AIHelperTooltip from "./addons/AIHelperTooltip";
 import "./AIHelper.scss";
 import { type PredefinedQA } from "./utils/fuzzySearch";
 import { saveQAAction } from "./actions/saveQAAction";
+import { sendMessageAction } from "./actions/sendMessageAction";
 import { flushSync } from "react-dom";
 
 export interface Message {
@@ -42,7 +43,7 @@ export default function AIHelper() {
   const messagesEndRef = useRef<HTMLDivElement>(null);
 
   // const initialState =  {id:"",text:"",sender:"ai",timestamp:new Date()} as const ;
-  
+
   // const [state, formAction, isPending] = useFormState(AIHelperAction,{message: initialState});
 
   const toggleChat = () => {
@@ -87,7 +88,7 @@ export default function AIHelper() {
       timestamp: new Date(),
       isPredefined: true,
     };
-    
+
     setTimeout(() => {
       setMessages((prev) => [...prev, aiMessage]);
       setIsLoading(false);
@@ -105,41 +106,14 @@ export default function AIHelper() {
     setMessages((prev) => [...prev, userMessage]);
     setIsLoading(true);
 
-   
     try {
-      const response = await fetch(
-        process.env.NEXT_PUBLIC_WEBHOOK_LINK || "",
-        {
-          method: "POST",
-          headers: {
-            "Content-Type": "application/json",
-          },
-          body: JSON.stringify({ message: text, id: userId }),
-        },
-      );
+      const result = await sendMessageAction({ text, userId });
 
-      const data = await response.json();
-
-      let messageText = "Thank you for your message!";
-
-      if (data.response) {
-        try {
-          // The response field contains a JSON string, parse it
-          const parsedResponse =
-            typeof data.response === "string"
-              ? JSON.parse(data.response)
-              : data.response;
-          messageText = parsedResponse;
-        } catch (e) {
-          // If parsing fails, use the response as is
-          messageText = data.response;
-        }
-      } else if (data.message) {
-        messageText = data.message;
+      if (!result.ok) {
+        throw new Error("Failed to send message");
       }
 
-      // Replace literal \n with actual newlines for proper markdown rendering
-      messageText = messageText.replace(/\\n/g, '\n');
+      const messageText = result.message;
 
       // Add AI response
       const aiMessage: Message = {
@@ -150,22 +124,18 @@ export default function AIHelper() {
       };
       setMessages((prev) => [...prev, aiMessage]);
 
-      // Submit hidden server action form to save directly to file
       try {
-        flushSync(()=>{
+        flushSync(() => {
           setPendingQuestion(text);
           setPendingAnswer(messageText);
-        })
-        // Programmatically submit server action form
+        });
         saveFormRef.current?.requestSubmit();
-        // Optimistically bump learned version so suggestions can refresh
         setLearnedVersion((v) => v + 1);
       } catch (saveError) {
-        console.error('Error triggering save action:', saveError);
+        console.error("Error triggering save action:", saveError);
       }
 
       await new Promise((resolve) => setTimeout(resolve, 1000));
-
     } catch (error) {
       const errorMessage: Message = {
         id: (Date.now() + 1).toString(),
@@ -181,7 +151,6 @@ export default function AIHelper() {
 
   return (
     <div className="ai-helper-container ">
-      {/* Hidden form to save Q&A directly via server action without API */}
       <form action={saveQAAction} ref={saveFormRef} style={{ display: "none" }}>
         <input type="hidden" name="question" value={pendingQuestion} />
         <input type="hidden" name="answer" value={pendingAnswer} />
@@ -202,7 +171,7 @@ export default function AIHelper() {
           } satisfies ChatWindowProps)}
         />
       )}
-        <AIHelperTooltip onNeverShowAgain={handleTooltipNeverShowAgain} />
+      <AIHelperTooltip onNeverShowAgain={handleTooltipNeverShowAgain} />
       <AIHelperButton onClick={toggleChat} isOpen={isOpen} />
     </div>
   );
