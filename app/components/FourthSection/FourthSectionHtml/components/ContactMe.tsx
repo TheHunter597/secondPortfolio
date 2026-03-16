@@ -30,17 +30,13 @@ export default function ContactMe() {
     );
   });
   return (
-    <div className="MainContactContainer  bg-white shadow-lg rounded-md h-fit">
-      <div className="ContactMe">
+    <div className="MainContactContainer">
+      <div className="contact-card">
         <ContactForm />
-        <div className="ContactMe__Socials">
-          <h4>
-            <span>Or </span>
-          </h4>
-          <div className="Socials__Content">
-            <span>Contact me via :</span>
-            <div className="Socials__Icons">{result}</div>
-          </div>
+        <div className="contact-card__socials">
+          <span className="contact-reach-label">or reach me via</span>
+          <div className="contact-divider-line" />
+          <div className="Socials__Icons">{result}</div>
         </div>
       </div>
     </div>

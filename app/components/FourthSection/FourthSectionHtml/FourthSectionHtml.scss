@@ -1,14 +1,12 @@
 .MainContactContainer {
   width: 40%;
-  max-width: 35rem;
+  max-width: 36rem;
   @media screen and (max-width: 1240px) and (min-width: 1001px) {
     width: 50%;
   }
-
   @media screen and (max-width: 1000px) and (min-width: 600px) {
-    width: 60%;
+    width: 65%;
   }
-
   @media screen and (max-width: 600px) {
     width: 100%;
   }
@@ -102,14 +100,13 @@
     width: 100%;
     height: 100%;
     input + label {
-      top: -5%;
+      top: 2.2rem;
     }
     label {
       font-size: 1rem;
       font-weight: 700;
       color: #373737;
       position: absolute;
-      left: 0.5rem;
       @media screen and (max-width: 768px) {
         font-size: 0.9rem;
       }
@@ -190,10 +187,191 @@
   }
 }
 
+// ─── Floating-label inputs ────────────────────────────────────────────────
 .ContactMe__Input {
-  div:nth-last-of-type(1) {
+  position: relative;
+  width: 100%;
+  padding-top: 1.5rem;
+
+  input,
+  textarea {
+    width: 100%;
+    background: #f9fafb;
+    border: 2px solid #cbd5e1;
+    border-radius: 6px;
+    padding: 0.55rem 0.75rem;
+    color: #111;
+    font-size: 1rem;
+    font-weight: 500;
+    outline: none;
+    transition:
+      border-color 0.2s ease,
+      box-shadow 0.2s ease,
+      background 0.2s ease;
+    resize: none;
+
+    &:focus {
+      border-color: #6366f1;
+      background: #fff;
+      box-shadow: 0 0 0 3px rgba(99, 102, 241, 0.15);
+    }
+
+    &:-webkit-autofill,
+    &:-webkit-autofill:hover,
+    &:-webkit-autofill:focus {
+      -webkit-text-fill-color: #111;
+      -webkit-box-shadow: 0 0 0 1000px #f9fafb inset;
+      transition: background-color 9999s ease-in-out 0s;
+    }
+  }
+
+  textarea {
+    min-height: 80px;
+  }
+
+  label {
+    position: absolute;
+    left: 0.65rem;
+    color: #94a3b8;
+    font-size: 0.72rem;
+    font-weight: 700;
+    pointer-events: none;
+    letter-spacing: 0.08em;
+    text-transform: uppercase;
+    background: #fff;
+    padding: 0 0.25rem;
+    border-radius: 2px;
+    transition: color 0.15s ease;
+  }
+
+  small {
+    display: block;
+    margin-top: 0.3rem;
+    font-size: 0.75rem;
+    color: #ef4444;
+  }
+}
+
+// ─── Card ─────────────────────────────────────────────────────────────────
+.contact-card {
+  background: #ffffff;
+  border-radius: 12px;
+  border-top: 4px solid #6366f1;
+  overflow: hidden;
+  box-shadow:
+    0 4px 6px rgba(0, 0, 0, 0.05),
+    0 20px 40px rgba(0, 0, 0, 0.1);
+}
+
+// ─── Header strip ─────────────────────────────────────────────────────────
+.contact-card__header {
+  background: #6366f1;
+  padding: 1.8rem 2rem 1.6rem;
+
+  h2 {
+    font-size: 2.4rem;
+    font-weight: 900;
+    color: #fff;
+    line-height: 1;
+    letter-spacing: -0.03em;
+
+    span {
+      color: #a5f3fc;
+    }
+
+    @media screen and (max-width: 768px) {
+      font-size: 1.9rem;
+    }
+  }
+
+  p {
+    margin-top: 0.5rem;
+    color: rgba(255, 255, 255, 0.85);
+    font-size: 0.875rem;
+    font-weight: 400;
+  }
+}
+
+// ─── Form body ────────────────────────────────────────────────────────────
+.contact-card__body {
+  padding: 1.8rem 2rem 1.6rem;
+  display: flex;
+  flex-direction: column;
+  gap: 2rem;
+
+  @media screen and (max-width: 768px) {
+    padding: 1.4rem 1.4rem 1.2rem;
+    gap: 1.6rem;
+  }
+}
+
+.contact-fieldset {
+  display: flex;
+  flex-direction: column;
+  gap: 1.2rem;
+  border: none;
+  padding: 0;
+  width: 100%;
+}
+
+// ─── Bottom socials strip ─────────────────────────────────────────────────
+.contact-card__socials {
+  display: flex;
+  align-items: center;
+  gap: 1rem;
+  padding: 1rem 2rem 1.4rem;
+  background: #fafafa;
+  border-top: 1px solid #e5e7eb;
+
+  @media screen and (max-width: 600px) {
+    flex-wrap: wrap;
+    gap: 0.8rem;
+    padding: 1rem 1.4rem 1.4rem;
+  }
+
+  .contact-reach-label {
+    font-size: 0.68rem;
+    text-transform: uppercase;
+    letter-spacing: 0.1em;
+    color: #9ca3af;
+    white-space: nowrap;
+    font-weight: 700;
+    flex-shrink: 0;
+  }
+
+  .contact-divider-line {
+    flex: 1;
+    height: 1px;
+    background: #e5e7eb;
+
+    @media screen and (max-width: 600px) {
+      display: none;
+    }
+  }
+
+  .Socials__Icons {
     display: flex;
-    flex-direction: column;
-    gap: 0.2rem;
+    flex-direction: row;
+    gap: 0.6rem;
+    align-items: center;
+
+    a {
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      width: 2.1rem;
+      height: 2.1rem;
+      border-radius: 6px;
+      background: #fff;
+      border: 2px solid #e5e7eb;
+      transition:
+        border-color 0.2s ease,
+        transform 0.2s ease;
+
+      &:hover {
+        border-color: #6366f1;
+        transform: translateY(-2px);
+      }
+    }
   }
 }

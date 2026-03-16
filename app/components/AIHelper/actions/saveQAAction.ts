@@ -1,5 +1,5 @@
 "use server";
-import { supabaseAdmin } from "@/app/lib/supabase";
+import { supabaseAdmin } from "@/app/lib/supabase-admin";
 import { checkIfQuestionExists, type PredefinedQA } from "../utils/fuzzySearch";
 import predefinedQuestions from "../data/predefinedQuestions.json";
 

@@ -15,6 +15,7 @@ export async function sendMessageAction({
   userId,
 }: SendMessageInput): Promise<SendMessageResult> {
   const webhookUrl = process.env.N8N_WEBHOOK_LINK;
+  console.log("Inside the server action");
 
   if (!text.trim()) {
     return {

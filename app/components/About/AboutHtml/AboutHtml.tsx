@@ -49,17 +49,6 @@ export default function AboutHtml() {
             and contributing to innovative projects that make a difference.
           </p>
         </div>
-        <div className="About__Portrait cursor-pointer h-fit">
-          <div className="w-fit relative">
-            <Image
-              src={"/images/portrait.jpeg"}
-              alt="portrait"
-              width={200}
-              height={200}
-              className="rounded-lg shadow-lg"
-            />
-          </div>
-        </div>
       </section>
     </Bounded>
   );

@@ -62,13 +62,13 @@ export default function SubmitButton() {
   }, [pending]);
   return (
     <button
-      className="rounded-md text-center w-full h-12 bg-red-400 hover:bg-red-500
+      className="rounded-md text-center w-full h-12 bg-[#6366f1] hover:bg-[#4f46e5]
        flex flex-col items-center justify-center relative overflow-hidden duration-300 hover:-translate-y-1"
       onClick={animate}
     >
       <motion.div
         className=" w-full h-full text-center font-bold text-lg text-white cursor-pointer
-             transition duration-300 bg-red-400 ease-in-out absolute whitespace-nowrap z-30 top-0
+             transition duration-300 bg-[#6366f1] ease-in-out absolute whitespace-nowrap z-30 top-0
             flex items-center justify-center"
         animate={uploadAnimations}
       >
@@ -76,7 +76,7 @@ export default function SubmitButton() {
       </motion.div>
       <motion.div
         className="w-full h-full text-center font-bold text-lg text-white cursor-pointer
-             transition duration-300 bg-red-400 ease-in-out z-20 absolute bottom-full flex items-center justify-center"
+             transition duration-300 bg-[#6366f1] ease-in-out z-20 absolute bottom-full flex items-center justify-center"
         animate={uploadingAnimations}
       >
         Sending...
@@ -87,7 +87,7 @@ export default function SubmitButton() {
       </motion.div>
       <motion.div
         className="w-full h-full  text-center font-bold text-lg text-white cursor-pointer
-             transition duration-300 bg-red-400 ease-in-out z-10 absolute bottom-full  flex items-center justify-center"
+             transition duration-300 bg-[#6366f1] ease-in-out z-10 absolute bottom-full  flex items-center justify-center"
         animate={completeAnimations}
       >
         Complete

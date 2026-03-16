@@ -1,6 +1,6 @@
 "use client";
 
-import { useRef, useState } from "react";
+import { useEffect, useRef, useState } from "react";
 import AIHelperButton from "./AIHelperButton";
 import ChatWindow, { type ChatWindowProps } from "./Chat/ChatWindow";
 import AIHelperTooltip from "./addons/AIHelperTooltip";
@@ -42,9 +42,10 @@ export default function AIHelper() {
   const [pendingAnswer, setPendingAnswer] = useState<string>("");
   const messagesEndRef = useRef<HTMLDivElement>(null);
 
-  // const initialState =  {id:"",text:"",sender:"ai",timestamp:new Date()} as const ;
-
-  // const [state, formAction, isPending] = useFormState(AIHelperAction,{message: initialState});
+  useEffect(() => {
+    // Cleanup old key that previously hid the entire helper.
+    localStorage.removeItem("aiHelperNeverShow");
+  }, []);
 
   const toggleChat = () => {
     if (!isOpen && !userId) {
@@ -67,6 +68,7 @@ export default function AIHelper() {
   };
 
   const handleTooltipNeverShowAgain = () => {
+    localStorage.setItem("aiHelperTooltipNeverShow", "true");
     setShowTooltip(false);
   };
 
@@ -171,7 +173,9 @@ export default function AIHelper() {
           } satisfies ChatWindowProps)}
         />
       )}
-      <AIHelperTooltip onNeverShowAgain={handleTooltipNeverShowAgain} />
+      {showTooltip && (
+        <AIHelperTooltip onNeverShowAgain={handleTooltipNeverShowAgain} />
+      )}
       <AIHelperButton onClick={toggleChat} isOpen={isOpen} />
     </div>
   );

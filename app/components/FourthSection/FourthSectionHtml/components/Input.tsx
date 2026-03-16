@@ -1,5 +1,4 @@
 import { motion } from "framer-motion";
-import { useState } from "react";
 export default function Input({
   label,
   element,
@@ -19,15 +18,18 @@ export default function Input({
   setValue: React.Dispatch<React.SetStateAction<string>>;
   error: string;
 }) {
+  const isActive = currentHovered == label || value.length != 0;
   const labelVariants = {
     active: {
-      y: "-150%",
-      scale: 1,
-      x: -5,
+      y: "-180%",
+      x: "-30%",
+      scale: 0.9,
+      color: "#6366f1",
     },
     inactive: {
       y: 0,
       scale: 1,
+      color: "#94a3b8",
     },
   };
   return (
@@ -72,11 +74,10 @@ export default function Input({
         )}
         <motion.label
           variants={labelVariants}
-          animate={
-            currentHovered == label || value.length != 0 ? "active" : "inactive"
-          }
+          animate={isActive ? "active" : "inactive"}
           htmlFor={`Contact-${label}`}
-          initial={{ translateY: "50%" }}
+          initial={{ y: 0 }}
+          transition={{ duration: 0.18, ease: "easeOut" }}
         >
           {label}
         </motion.label>

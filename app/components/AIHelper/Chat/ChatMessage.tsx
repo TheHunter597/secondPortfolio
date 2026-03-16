@@ -3,7 +3,6 @@
 import type { Message } from "../AIHelper";
 import ReactMarkdown from "react-markdown";
 import remarkGfm from "remark-gfm";
-import rehypeRaw from "rehype-raw";
 import "./ChatMessage.scss";
 
 interface ChatMessageProps {
@@ -22,10 +21,7 @@ export default function ChatMessage({ message }: ChatMessageProps) {
     <div className={`chat-message ${message.sender}`}>
       <div className="message-content">
         <div className="message-text">
-          <ReactMarkdown
-            remarkPlugins={[remarkGfm]}
-            rehypePlugins={[rehypeRaw]}
-          >
+          <ReactMarkdown remarkPlugins={[remarkGfm]}>
             {message.text}
           </ReactMarkdown>
         </div>
